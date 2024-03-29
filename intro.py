@@ -16,10 +16,7 @@ def intro():
 To get started, please choose the symptoms you have from the list below:
 {numbered_symptoms}
 Your response should be symptom numbers separated by comma: """
-    symptom = input(welcome)
-    symptom = [int(i) for i in symptom.split(",")]
-    symptom = [symptoms[i-1] for i in symptom]
-    symptom = set(symptom)
+    symptom = get_input(welcome)
     message = identify_disease(symptom)
     print(message)
 
@@ -41,6 +38,20 @@ Thank you for using our application.'''
 
     return message
 
-
+# User Validation 
+def get_input(prompt):
+    valid = False
+    while not valid:
+        try:
+           user_input = input(prompt)
+           user_input = [int(i) for i in user_input.split(",")]
+           user_input = [symptoms[i-1] for i in user_input]
+           user_input = set(user_input)
+           valid=True
+           break
+        except: 
+            pass  
+    return user_input       
+    
 if __name__ == "__main__":
     intro()
