@@ -1,8 +1,9 @@
 diseases = {
-    'malaria': {'high fever', 'headache', 'lack of appetite'},
+    'Malaria': {'high fever', 'headache', 'lack of appetite'},
     "Influenza": {"fever", "cough", "sore throat", "muscle aches", "fatigue"},
     "Common Cold": {"runny nose", "sneezing", "sore throat", "cough", "mild fever"},
     "COVID-19": {"fever", "dry cough", "shortness of breath", "fatigue", "loss of taste or smell"}
+    "Cholera": {"vomiting", "thirst", "diarrhea", "irritability", "low blood pressure"}
 }
 
 symptoms = ['dry cough', 'fever', 'runny nose', 'fatigue', 'sore throat', 'muscle aches', 'cough',
