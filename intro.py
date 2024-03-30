@@ -4,11 +4,11 @@ diseases = {
     "Common Cold": {"runny nose", "sneezing", "sore throat", "cough", "mild fever"},
     "COVID-19": {"fever", "dry cough", "shortness of breath", "fatigue", "loss of taste or smell"},
     "Cholera": {"vomiting", "thirst", "diarrhea", "irritability", "low blood pressure"},
-    "Chicken pox": {"headache", "lost of appetite", "sore throat", "stomach ache"}
+    "Chicken pox": {"headache", "lack of appetite", "sore throat", "stomach ache"}
 }
 
 symptoms = ['dry cough', 'fever', 'runny nose', 'fatigue', 'sore throat', 'muscle aches', 'cough',
-            'shortness of breath', 'mild fever', 'loss of taste or smell', 'sneezing', 'lack of appetite', 'headache']
+            'shortness of breath', 'mild fever', 'loss of taste or smell', 'sneezing', 'lack of appetite', 'headache', 'vomiting', 'thirst','diarrhea', 'irritability','low blood pressure','stomach ache']
 
 
 def intro():
