@@ -4,7 +4,7 @@ diseases = {
     "Common Cold": {"runny nose", "sneezing", "sore throat", "cough", "mild fever"},
     "COVID-19": {"fever", "dry cough", "shortness of breath", "fatigue", "loss of taste or smell"},
     "Cholera": {"vomiting", "thirst", "diarrhea", "irritability", "low blood pressure"},
-    "Chicken pox": {"headache", "lack of appetite", "sore throat", "stomach ache"}
+    "Chicken pox": {"headache", "lack of appetite", "sore throat", "stomach ache"},
     "Typhoid Fever":{"fever", "weakness", "stomach pain", "headache", "lack of appetite"}
 }
 
@@ -25,7 +25,7 @@ To get started, please choose the symptoms you have from the list below:
 
 def identify_disease(user_symptoms):
     score = 0
-    disease = diseases['malaria']
+    disease = diseases['Malaria']
     for key in diseases.keys():
         intersection = diseases[key].intersection(user_symptoms)
         new_score = len(intersection)
