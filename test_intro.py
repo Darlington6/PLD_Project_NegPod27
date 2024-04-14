@@ -19,3 +19,14 @@ class TestDiseaseIdentification(unittest.TestCase):
         self.assertEqual(actual_input, expected_input)
         self.assertIsInstance(list(actual_input)[0], str)
         # self.assertTrue(all(symptom.isdigit() for symptom in actual_input))
+
+           def test_identify_disease(self):
+        # Test for a specific case
+        user_symptoms = {symptoms[1], symptoms[6], symptoms[2]}
+        expected_output = "Influenza"
+        self.assertEqual(identify_disease(user_symptoms)[1], expected_output)
+
+
+if __name__ == '__main__':
+    unittest.main()
+
