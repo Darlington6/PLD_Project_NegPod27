@@ -15,3 +15,8 @@ client = OpenAI(
 
 origin = 'https://www.nhsinform.scot/illnesses-and-conditions/a-to-z/'
 page = requests.get(origin)
+
+soup = BeautifulSoup(page.content, 'html.parser')
+
+diseases = soup.select('.az_list_indivisual > ul > li > a')
+
