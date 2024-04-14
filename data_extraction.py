@@ -53,7 +53,7 @@ Examples of well-formatted responses:
         s = Symptom(
             name=symptom
         
-         )
+        )
         d.symptoms.append(s)
 
     db.add(d)
