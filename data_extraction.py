@@ -43,3 +43,13 @@ Examples of well-formatted responses:
              "content": f'{whole_page}'}
         ]
     )
+
+     symptoms = completion.choices[0].message.content.split(',')
+
+    d = Disease(
+        name=disease.text
+    )
+    for symptom in symptoms:
+        s = Symptom(
+            name=symptom
+        )
