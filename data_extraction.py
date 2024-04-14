@@ -19,3 +19,9 @@ page = requests.get(origin)
 soup = BeautifulSoup(page.content, 'html.parser')
 
 diseases = soup.select('.az_list_indivisual > ul > li > a')
+
+for disease in diseases:
+    link = disease.get('href')
+    disease_page = requests.get(link)
+    disease_soup = BeautifulSoup(disease_page.content, 'html.parser')
+    whole_page = disease_soup.text
