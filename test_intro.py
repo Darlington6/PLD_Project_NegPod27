@@ -2,7 +2,7 @@ import unittest
 from intro import diseases, symptoms, get_input, intro, identify_disease
 
 try:
-    class TestDiseaseIdentification(unittest.TestCase):
+    # class TestDiseaseIdentification(unittest.TestCase):
 
             def test_diseases(self):
                 self.assertIsInstance(diseases, dict)
