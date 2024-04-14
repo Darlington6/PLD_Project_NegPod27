@@ -31,3 +31,15 @@ for disease in diseases:
         messages=[
             {"role": "system",
              "content": '''As a medical specialist, your task is to identify and list symptoms from a provided text describing a medical condition or illness. Your response should consist solely of the symptoms, formatted as a comma-separated list on a single line. Ensure that no extra sentences or unrelated details are included. If the text does not explicitly mention any symptoms, provide a list of five common symptoms associated with the condition described.
+
+Examples of well-formatted responses:
+
+"headaches, blurred vision, fainting spells"
+"increased thirst, frequent urination, weight loss"
+"fatigue, sore throat, fever, swollen lymph nodes, enlarged spleen"
+"difficulty breathing, wheezing, chest tightness, cough"
+"abdominal pain, bloating, diarrhea, constipation, gas"'''},
+            {"role": "user",
+             "content": f'{whole_page}'}
+        ]
+    )
