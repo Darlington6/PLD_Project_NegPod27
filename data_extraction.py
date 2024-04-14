@@ -8,3 +8,7 @@ from app.db import get_db, init_db
 init_db()
 db_gen = get_db()
 db = next(db_gen)
+
+client = OpenAI(
+    api_key='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'
+)
