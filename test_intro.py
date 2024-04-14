@@ -20,7 +20,7 @@ class TestDiseaseIdentification(unittest.TestCase):
         self.assertIsInstance(list(actual_input)[0], str)
         # self.assertTrue(all(symptom.isdigit() for symptom in actual_input))
 
-           def test_identify_disease(self):
+    def test_identify_disease(self):
         # Test for a specific case
         user_symptoms = {symptoms[1], symptoms[6], symptoms[2]}
         expected_output = "Influenza"

@@ -19,7 +19,7 @@ def intro():
 To get started, please choose the symptoms you have from the list below:
 {numbered_symptoms}"""
     symptom = get_input(welcome)
-    message = identify_disease(symptom)
+    message = identify_disease(symptom)[0]
     print(message)
 
 
@@ -39,7 +39,7 @@ Please know that this is not a professional doctor, so you should not rely solel
 
 Thank you for using our application.'''
 
-    return message
+    return [message, disease]
 
 
 # User Validation
