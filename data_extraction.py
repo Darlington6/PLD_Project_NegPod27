@@ -1,4 +1,8 @@
-import requests
+for disease in diseases:
+    link = disease.get('href')
+    disease_page = requests.get(link)
+    disease_soup = BeautifulSoup(disease_page.content, 'html.parser')
+    whole_page = disease_soup.textimport requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
 from app.db.models import Disease, Symptom
