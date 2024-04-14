@@ -52,4 +52,10 @@ Examples of well-formatted responses:
     for symptom in symptoms:
         s = Symptom(
             name=symptom
-        )
+        
+         )
+        d.symptoms.append(s)
+
+    db.add(d)
+    db.commit()
+    print('added')
