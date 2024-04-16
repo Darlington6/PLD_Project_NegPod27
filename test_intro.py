@@ -1,5 +1,5 @@
 import unittest
-from intro import diseases, symptoms, get_input, intro, identify_disease
+from intro import diseases, symptoms, get_input, identify_disease
 
 try:
     class TestDiseaseIdentification(unittest.TestCase):

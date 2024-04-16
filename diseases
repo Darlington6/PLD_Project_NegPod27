@@ -1,0 +1,4436 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+-- Started on 2024-04-16 16:59:13 CAT
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 213 (class 1259 OID 28182)
+-- Name: disease_symptoms; Type: TABLE; Schema: public; Owner: rocco
+--
+
+CREATE TABLE public.disease_symptoms (
+    disease_id integer,
+    symptom_id integer
+);
+
+
+ALTER TABLE public.disease_symptoms OWNER TO rocco;
+
+--
+-- TOC entry 210 (class 1259 OID 28161)
+-- Name: diseases; Type: TABLE; Schema: public; Owner: rocco
+--
+
+CREATE TABLE public.diseases (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE public.diseases OWNER TO rocco;
+
+--
+-- TOC entry 209 (class 1259 OID 28160)
+-- Name: diseases_id_seq; Type: SEQUENCE; Schema: public; Owner: rocco
+--
+
+CREATE SEQUENCE public.diseases_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.diseases_id_seq OWNER TO rocco;
+
+--
+-- TOC entry 3377 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: diseases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rocco
+--
+
+ALTER SEQUENCE public.diseases_id_seq OWNED BY public.diseases.id;
+
+
+--
+-- TOC entry 212 (class 1259 OID 28172)
+-- Name: symptoms; Type: TABLE; Schema: public; Owner: rocco
+--
+
+CREATE TABLE public.symptoms (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE public.symptoms OWNER TO rocco;
+
+--
+-- TOC entry 211 (class 1259 OID 28171)
+-- Name: symptoms_id_seq; Type: SEQUENCE; Schema: public; Owner: rocco
+--
+
+CREATE SEQUENCE public.symptoms_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.symptoms_id_seq OWNER TO rocco;
+
+--
+-- TOC entry 3378 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: symptoms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rocco
+--
+
+ALTER SEQUENCE public.symptoms_id_seq OWNED BY public.symptoms.id;
+
+
+--
+-- TOC entry 3216 (class 2604 OID 28164)
+-- Name: diseases id; Type: DEFAULT; Schema: public; Owner: rocco
+--
+
+ALTER TABLE ONLY public.diseases ALTER COLUMN id SET DEFAULT nextval('public.diseases_id_seq'::regclass);
+
+
+--
+-- TOC entry 3217 (class 2604 OID 28175)
+-- Name: symptoms id; Type: DEFAULT; Schema: public; Owner: rocco
+--
+
+ALTER TABLE ONLY public.symptoms ALTER COLUMN id SET DEFAULT nextval('public.symptoms_id_seq'::regclass);
+
+
+--
+-- TOC entry 3371 (class 0 OID 28182)
+-- Dependencies: 213
+-- Data for Name: disease_symptoms; Type: TABLE DATA; Schema: public; Owner: rocco
+--
+
+COPY public.disease_symptoms (disease_id, symptom_id) FROM stdin;
+1	1
+1	2
+1	3
+1	4
+1	5
+1	6
+2	7
+2	8
+2	9
+2	10
+2	11
+2	12
+2	13
+2	14
+3	15
+3	16
+3	17
+3	18
+3	19
+3	20
+3	21
+3	22
+3	23
+4	24
+4	25
+4	26
+4	27
+4	28
+5	29
+5	30
+5	31
+5	32
+5	33
+6	34
+6	35
+6	36
+6	37
+6	31
+6	32
+6	38
+6	39
+7	25
+7	40
+7	28
+7	29
+7	41
+8	29
+8	42
+8	30
+8	31
+8	33
+9	34
+9	43
+9	44
+9	40
+9	45
+9	31
+9	46
+9	38
+9	39
+10	47
+10	48
+10	49
+10	50
+10	51
+10	52
+11	53
+11	54
+11	55
+11	56
+12	57
+12	58
+12	59
+12	60
+12	61
+12	62
+12	63
+12	64
+12	65
+13	66
+13	67
+13	68
+13	20
+13	69
+13	70
+13	71
+14	72
+14	73
+14	74
+15	75
+15	76
+15	77
+15	78
+15	79
+15	74
+15	80
+16	81
+16	82
+16	83
+16	84
+16	85
+16	86
+16	87
+17	88
+18	89
+18	90
+18	47
+18	91
+18	92
+18	93
+18	94
+18	95
+18	96
+18	97
+18	98
+18	99
+18	100
+18	101
+18	102
+19	103
+19	104
+19	105
+19	106
+19	107
+20	108
+20	109
+20	110
+20	111
+20	112
+21	62
+21	113
+21	114
+21	115
+21	116
+21	117
+21	118
+22	119
+22	101
+22	120
+22	121
+22	122
+22	123
+22	124
+22	125
+22	126
+22	127
+22	128
+22	129
+22	130
+22	131
+22	132
+22	133
+22	134
+23	135
+23	136
+23	137
+23	138
+23	139
+23	140
+23	141
+23	142
+23	29
+23	143
+23	144
+23	145
+23	146
+23	147
+23	60
+23	69
+23	148
+23	149
+23	5
+24	150
+24	151
+24	152
+24	153
+25	47
+25	49
+25	97
+25	20
+25	22
+25	52
+26	5
+26	47
+26	154
+26	107
+26	155
+26	60
+26	156
+26	157
+26	158
+26	159
+26	160
+27	161
+27	162
+27	163
+27	164
+27	165
+27	166
+27	167
+28	62
+28	107
+28	5
+28	168
+28	98
+29	5
+29	169
+29	170
+29	171
+30	172
+30	173
+30	174
+30	175
+30	176
+31	1
+31	177
+31	127
+31	60
+31	5
+32	178
+32	179
+32	180
+32	181
+32	182
+32	183
+32	184
+32	185
+32	186
+32	187
+32	188
+32	189
+32	190
+32	191
+32	192
+32	193
+32	194
+32	195
+32	196
+32	197
+32	140
+32	198
+32	199
+32	200
+32	201
+32	202
+32	203
+33	204
+33	205
+33	206
+33	207
+33	208
+34	209
+34	210
+35	211
+35	212
+35	213
+35	214
+35	215
+36	216
+36	20
+36	97
+36	19
+36	27
+37	217
+37	218
+37	219
+37	220
+37	221
+37	222
+38	223
+38	224
+38	225
+38	226
+38	227
+38	228
+38	229
+38	230
+38	231
+38	232
+38	233
+38	234
+38	140
+39	216
+39	235
+39	236
+39	237
+39	238
+39	239
+39	240
+39	241
+40	242
+40	243
+40	244
+40	18
+40	245
+40	246
+40	4
+40	247
+40	248
+40	249
+40	250
+40	251
+40	252
+40	253
+41	254
+41	255
+41	256
+41	257
+41	258
+41	259
+41	260
+42	261
+42	262
+42	263
+42	264
+42	29
+43	265
+43	67
+43	266
+43	97
+43	56
+44	267
+44	268
+44	269
+44	270
+44	271
+45	272
+45	97
+45	273
+45	274
+45	52
+46	275
+46	276
+46	277
+46	278
+46	279
+46	280
+46	281
+47	282
+47	51
+47	283
+47	284
+47	285
+47	286
+47	287
+47	288
+47	289
+48	290
+48	291
+48	292
+48	293
+48	294
+48	295
+48	296
+48	297
+48	298
+49	299
+49	49
+49	83
+49	300
+49	301
+49	297
+49	302
+49	303
+49	304
+49	305
+50	306
+50	307
+50	308
+50	309
+50	310
+51	311
+51	312
+51	313
+51	314
+51	315
+52	40
+52	316
+52	98
+52	317
+52	5
+53	318
+53	319
+53	98
+53	320
+53	5
+54	321
+54	322
+54	323
+54	324
+54	325
+55	326
+55	327
+55	328
+56	329
+56	67
+56	272
+56	107
+56	330
+56	331
+56	40
+56	156
+56	20
+56	332
+56	318
+56	98
+56	317
+56	333
+56	334
+56	29
+57	335
+57	336
+57	337
+57	338
+57	339
+58	340
+58	341
+58	342
+58	343
+58	18
+58	60
+58	27
+58	85
+58	344
+58	345
+59	346
+59	347
+59	348
+59	349
+59	350
+59	351
+60	240
+60	272
+60	352
+60	353
+60	354
+61	62
+61	107
+61	355
+61	356
+61	2
+61	40
+61	357
+61	358
+61	20
+61	98
+61	317
+61	23
+61	359
+61	143
+61	168
+62	360
+62	361
+62	47
+62	362
+62	363
+62	364
+62	365
+62	366
+62	367
+62	368
+62	369
+62	370
+63	371
+63	20
+63	69
+63	358
+63	143
+64	372
+64	373
+64	374
+64	375
+64	376
+65	77
+65	377
+65	378
+65	379
+65	380
+65	381
+65	382
+65	383
+66	47
+66	384
+66	385
+66	386
+66	60
+66	387
+66	20
+66	388
+66	389
+66	390
+66	391
+66	392
+67	47
+67	29
+67	393
+67	394
+67	5
+67	395
+68	396
+68	397
+68	398
+68	399
+68	400
+69	67
+69	401
+69	29
+69	42
+69	397
+69	241
+70	67
+70	402
+70	403
+70	98
+70	404
+71	405
+72	47
+72	67
+72	49
+72	97
+72	406
+72	407
+72	19
+73	408
+73	156
+73	409
+73	410
+73	140
+73	67
+73	411
+73	412
+73	413
+73	414
+73	415
+73	29
+73	47
+73	416
+73	49
+73	417
+73	418
+73	173
+73	20
+73	89
+73	419
+73	69
+73	22
+73	420
+73	421
+74	69
+74	422
+74	423
+74	358
+74	424
+75	425
+75	426
+75	427
+75	428
+75	429
+75	430
+75	431
+75	432
+75	433
+75	434
+75	435
+75	436
+75	399
+75	437
+75	29
+76	438
+76	439
+76	319
+76	36
+76	440
+76	27
+76	441
+76	442
+76	443
+77	444
+77	445
+77	446
+77	447
+77	280
+78	74
+78	448
+78	449
+78	450
+78	319
+78	451
+78	452
+78	453
+78	72
+78	318
+78	27
+78	143
+79	62
+79	5
+79	393
+79	454
+79	455
+80	40
+80	62
+80	107
+80	456
+80	457
+80	458
+80	459
+80	23
+80	64
+80	460
+80	5
+81	461
+81	462
+81	463
+81	464
+81	342
+81	465
+82	466
+82	69
+82	20
+82	135
+82	63
+83	467
+83	358
+83	468
+83	469
+83	5
+84	256
+84	107
+84	470
+84	5
+84	471
+85	472
+85	473
+85	474
+85	475
+85	476
+86	477
+86	478
+86	319
+86	479
+86	111
+87	480
+87	481
+87	482
+87	483
+87	484
+87	485
+88	486
+88	487
+88	389
+88	488
+88	391
+88	489
+88	490
+88	491
+88	492
+89	493
+89	494
+89	495
+89	496
+89	497
+89	498
+89	499
+89	500
+90	391
+90	501
+90	373
+90	502
+90	503
+90	504
+91	505
+91	506
+91	139
+91	507
+91	29
+92	508
+93	509
+93	510
+93	511
+93	512
+93	513
+93	514
+93	64
+93	515
+94	516
+94	517
+94	368
+94	518
+94	519
+94	520
+95	521
+95	522
+95	523
+95	524
+95	525
+95	526
+95	527
+95	528
+95	529
+95	530
+95	531
+95	532
+95	533
+95	534
+95	535
+95	536
+95	537
+95	538
+95	539
+95	540
+95	541
+95	542
+95	543
+95	544
+95	545
+95	546
+95	547
+95	272
+95	229
+96	548
+96	549
+96	113
+96	550
+96	551
+96	77
+96	552
+96	553
+97	554
+97	555
+97	556
+97	557
+97	558
+97	127
+97	559
+98	480
+98	67
+98	49
+98	97
+98	560
+98	561
+99	562
+99	109
+99	173
+99	174
+99	563
+100	466
+100	481
+100	564
+100	565
+100	27
+101	555
+101	566
+101	567
+101	568
+101	60
+102	569
+102	570
+102	571
+102	572
+102	573
+103	574
+103	575
+103	576
+103	577
+103	578
+103	579
+104	67
+104	580
+104	581
+104	582
+104	583
+105	584
+105	585
+105	586
+105	587
+106	588
+106	49
+106	589
+106	590
+106	591
+106	592
+106	27
+107	593
+107	594
+107	592
+107	448
+107	595
+108	596
+108	22
+108	319
+108	597
+108	143
+109	598
+109	599
+109	600
+109	601
+109	602
+110	603
+110	604
+110	605
+110	592
+110	606
+111	607
+111	608
+111	609
+111	610
+111	611
+111	612
+111	613
+112	614
+112	615
+112	616
+112	617
+112	618
+113	619
+114	620
+114	22
+114	481
+114	621
+114	622
+115	623
+115	67
+115	373
+115	456
+115	27
+115	624
+116	373
+116	22
+116	625
+116	624
+116	626
+117	627
+117	628
+117	629
+117	555
+117	630
+117	631
+117	632
+117	633
+117	634
+118	635
+118	636
+118	637
+118	638
+118	4
+119	639
+119	640
+119	641
+119	642
+120	643
+120	156
+120	644
+120	645
+120	65
+121	358
+121	22
+121	440
+121	646
+121	647
+122	648
+122	649
+122	608
+122	650
+122	651
+123	652
+123	653
+123	226
+123	654
+123	655
+123	656
+123	657
+123	299
+123	157
+123	658
+123	659
+123	660
+123	431
+123	661
+123	662
+123	663
+123	62
+123	60
+123	664
+123	665
+124	67
+124	272
+124	135
+124	56
+124	52
+125	666
+125	76
+125	74
+125	667
+125	226
+125	20
+125	668
+125	669
+125	670
+125	319
+125	671
+125	646
+125	672
+125	673
+125	674
+125	143
+126	193
+126	675
+126	201
+126	676
+126	677
+127	442
+127	678
+127	679
+127	680
+127	52
+128	62
+128	681
+128	682
+128	606
+128	391
+129	683
+129	684
+129	685
+129	686
+129	687
+130	256
+130	97
+130	69
+130	688
+130	19
+130	20
+131	689
+131	97
+131	19
+131	22
+131	23
+132	690
+133	49
+133	691
+133	69
+133	20
+133	692
+133	422
+134	693
+134	694
+134	695
+134	696
+134	697
+134	698
+134	699
+134	700
+135	701
+135	702
+135	703
+135	704
+135	705
+135	22
+135	706
+135	707
+135	708
+135	709
+135	710
+135	143
+136	47
+136	461
+136	711
+136	712
+136	49
+136	713
+136	238
+136	714
+136	715
+136	358
+136	391
+136	716
+136	717
+136	718
+137	461
+137	719
+137	720
+137	721
+137	722
+137	723
+138	724
+138	47
+138	725
+138	49
+138	417
+138	29
+139	726
+139	727
+139	27
+139	728
+140	729
+140	730
+140	378
+140	731
+140	732
+140	733
+141	734
+141	77
+141	735
+141	736
+141	737
+142	696
+142	738
+142	739
+142	740
+142	741
+143	742
+143	743
+143	744
+143	745
+143	746
+143	342
+143	747
+144	748
+144	581
+144	20
+144	22
+144	97
+144	749
+145	76
+145	750
+145	751
+145	752
+145	318
+146	753
+146	754
+146	755
+146	697
+146	756
+147	757
+147	758
+147	759
+147	760
+147	761
+148	287
+148	762
+148	411
+148	763
+148	764
+148	247
+148	765
+148	766
+148	767
+148	768
+148	85
+148	143
+148	769
+148	770
+149	771
+149	772
+149	773
+149	774
+149	775
+149	776
+150	777
+150	360
+150	361
+150	778
+150	368
+150	111
+150	779
+150	780
+150	106
+151	781
+151	782
+151	783
+151	168
+152	596
+152	784
+152	419
+152	396
+152	785
+152	786
+152	787
+152	20
+152	788
+152	789
+152	173
+152	698
+152	790
+152	791
+152	792
+152	793
+153	29
+153	667
+153	20
+153	97
+153	794
+153	52
+153	795
+153	358
+154	796
+154	27
+154	797
+154	419
+154	798
+154	20
+154	97
+154	799
+154	800
+154	173
+154	795
+154	801
+154	802
+154	29
+155	695
+155	107
+155	803
+155	804
+155	805
+156	806
+157	67
+157	387
+157	807
+157	22
+157	319
+157	36
+157	397
+157	808
+157	167
+157	809
+157	810
+157	29
+157	811
+158	216
+158	812
+158	397
+158	27
+158	813
+159	67
+159	173
+159	814
+159	397
+159	22
+160	256
+160	62
+160	40
+160	815
+160	397
+160	318
+160	816
+160	817
+161	818
+161	819
+161	820
+161	821
+161	822
+161	823
+161	136
+161	824
+161	606
+161	825
+161	826
+161	827
+161	828
+161	140
+162	216
+162	65
+162	555
+162	829
+162	810
+162	29
+163	141
+163	431
+163	830
+163	831
+163	832
+163	833
+163	834
+163	835
+163	836
+163	837
+164	62
+164	838
+164	839
+164	840
+164	555
+164	60
+164	841
+164	842
+164	843
+164	844
+164	136
+164	143
+164	85
+164	23
+164	845
+164	140
+165	846
+165	5
+165	847
+165	848
+165	29
+166	849
+166	850
+167	851
+167	852
+167	853
+167	442
+167	695
+168	464
+168	342
+168	373
+168	624
+168	391
+169	854
+169	855
+169	458
+169	856
+169	857
+170	858
+170	859
+170	860
+170	861
+170	862
+171	863
+171	864
+171	865
+171	866
+171	5
+172	867
+172	868
+172	869
+172	870
+172	56
+172	871
+172	872
+173	173
+174	873
+174	373
+174	874
+174	720
+174	875
+174	876
+174	877
+175	47
+175	878
+175	879
+175	880
+175	49
+175	40
+176	216
+176	395
+176	881
+176	882
+176	358
+176	883
+177	481
+177	884
+177	885
+177	20
+177	886
+177	887
+177	358
+177	888
+178	47
+178	240
+178	236
+178	889
+178	890
+179	891
+179	892
+179	893
+179	592
+179	894
+180	895
+180	896
+180	69
+180	897
+180	898
+180	52
+181	256
+181	62
+181	696
+181	753
+181	448
+181	899
+181	900
+181	697
+181	40
+181	699
+181	901
+181	902
+182	903
+182	904
+182	319
+182	336
+182	905
+182	692
+183	906
+183	907
+183	908
+183	909
+183	657
+184	910
+184	911
+184	173
+184	912
+184	77
+184	745
+184	913
+184	914
+184	915
+184	916
+184	917
+184	918
+185	326
+185	919
+185	920
+185	921
+185	922
+185	923
+185	924
+185	925
+185	391
+186	926
+186	927
+186	20
+186	173
+186	928
+186	929
+186	930
+186	256
+187	67
+187	62
+187	19
+187	97
+187	20
+188	67
+188	47
+188	49
+188	20
+188	931
+189	932
+189	57
+189	933
+189	431
+189	934
+189	935
+189	936
+189	937
+189	663
+189	938
+189	939
+190	940
+190	941
+190	942
+190	317
+190	943
+191	22
+191	167
+191	62
+191	944
+191	945
+192	299
+192	387
+192	946
+192	167
+192	27
+192	646
+192	947
+192	29
+193	948
+193	949
+193	950
+193	373
+193	951
+194	952
+194	953
+194	954
+194	955
+194	956
+194	957
+195	27
+195	958
+195	959
+195	646
+195	143
+195	960
+196	282
+196	51
+196	283
+196	284
+196	285
+196	286
+196	287
+196	288
+196	289
+197	20
+197	961
+197	962
+197	963
+197	964
+197	965
+198	966
+198	91
+198	967
+198	20
+198	968
+198	78
+198	136
+198	27
+198	969
+198	29
+198	970
+198	971
+198	972
+199	973
+199	27
+199	283
+199	974
+199	975
+199	765
+199	976
+199	143
+200	431
+200	59
+200	409
+200	663
+200	939
+201	256
+201	62
+201	977
+201	168
+201	20
+201	27
+201	23
+201	107
+201	5
+202	976
+202	978
+202	27
+202	448
+202	979
+203	47
+203	49
+203	60
+203	97
+203	980
+203	961
+203	52
+203	23
+203	981
+203	982
+204	983
+204	984
+204	985
+204	986
+204	987
+205	988
+205	989
+205	990
+205	991
+205	992
+205	993
+205	994
+205	415
+205	995
+205	470
+205	996
+205	997
+205	644
+205	998
+205	58
+205	999
+205	1000
+205	247
+205	1001
+205	5
+206	1002
+206	1003
+206	1004
+206	1005
+206	1006
+207	1007
+207	77
+207	1008
+207	1009
+207	343
+207	1010
+207	1011
+207	1012
+207	1013
+208	156
+208	26
+208	1014
+208	241
+208	399
+209	1015
+209	1016
+209	156
+209	992
+209	1017
+209	287
+210	1018
+210	299
+210	1019
+210	69
+210	20
+210	167
+210	27
+210	139
+210	1020
+211	698
+211	592
+211	567
+211	1021
+211	595
+212	5
+212	1022
+212	371
+212	580
+212	1023
+212	1024
+212	566
+212	697
+212	1025
+212	247
+212	1026
+213	726
+213	1027
+213	1028
+213	1029
+213	1030
+213	1031
+213	1032
+213	1033
+213	1034
+213	1035
+213	1036
+214	1037
+214	1038
+214	1039
+214	1040
+214	1041
+215	1042
+215	1043
+215	67
+215	1044
+215	272
+215	1045
+215	1046
+215	1047
+215	697
+215	40
+215	20
+215	241
+215	1048
+215	1049
+216	272
+216	318
+216	98
+216	481
+216	1050
+217	256
+217	62
+217	156
+217	1051
+217	1052
+218	216
+218	168
+218	397
+218	27
+218	1053
+219	1054
+220	299
+220	1055
+220	1056
+220	1057
+220	1058
+220	1059
+220	1060
+221	1061
+221	865
+221	111
+221	1062
+221	1063
+222	40
+222	1064
+222	1065
+222	1066
+222	1067
+223	1068
+223	1069
+223	1070
+223	1071
+223	1072
+224	1073
+224	397
+224	1074
+224	1075
+224	1076
+225	1077
+225	1078
+225	1079
+225	847
+225	697
+225	1080
+226	1081
+226	1082
+226	1083
+226	1084
+226	1085
+226	1086
+226	1087
+227	1088
+227	682
+227	1089
+227	1090
+227	1091
+228	1092
+228	1093
+228	1094
+228	1095
+228	1096
+229	1097
+229	1098
+229	591
+229	1099
+229	1100
+229	1101
+229	1102
+229	1103
+229	1104
+230	1105
+230	1106
+230	821
+230	1107
+230	1108
+231	1109
+231	1110
+231	1111
+231	1112
+232	691
+232	238
+232	1113
+232	1114
+232	212
+232	1115
+233	193
+233	256
+233	1116
+233	1117
+233	663
+234	1118
+234	1119
+234	1120
+234	73
+235	1121
+235	18
+235	19
+235	1122
+235	1123
+236	47
+236	107
+236	1124
+236	23
+236	60
+236	1125
+236	1126
+236	1127
+236	458
+236	139
+236	410
+236	1128
+236	64
+236	5
+237	1129
+237	1130
+237	1131
+237	1132
+237	825
+237	1133
+237	1134
+237	1135
+238	1136
+238	603
+238	1137
+238	604
+238	605
+238	592
+238	606
+239	1138
+239	1139
+239	1140
+239	608
+239	379
+239	795
+239	27
+239	651
+239	1141
+239	1142
+240	1143
+240	1144
+240	1145
+240	1146
+240	1147
+240	702
+240	1148
+240	1149
+241	1150
+241	1151
+241	1152
+241	1153
+241	1154
+241	1155
+242	1156
+242	58
+242	1157
+242	1158
+242	1159
+242	1160
+243	663
+243	1161
+243	1162
+243	1163
+243	1164
+243	1165
+243	1166
+243	1167
+243	1168
+243	1169
+244	1170
+244	1171
+244	74
+244	1172
+244	1173
+244	1174
+244	1175
+244	5
+245	318
+245	2
+245	111
+245	22
+245	1176
+246	1177
+246	1178
+246	1179
+246	1111
+246	1180
+246	1181
+247	67
+247	27
+247	474
+247	431
+247	20
+248	1182
+248	1183
+248	58
+248	1184
+248	1185
+249	1186
+249	1187
+249	1188
+249	1189
+249	431
+249	1190
+249	1191
+249	136
+249	409
+249	1192
+249	1193
+249	1194
+249	663
+249	140
+250	1195
+250	1196
+250	1197
+250	1198
+250	1199
+250	1200
+250	1201
+250	1202
+250	1203
+250	1204
+250	1205
+250	1206
+250	1207
+250	1208
+250	1209
+250	1210
+251	1211
+252	1212
+252	1213
+252	1214
+252	1215
+252	1216
+253	1217
+253	1218
+253	1219
+253	1220
+253	1221
+253	1222
+254	1223
+254	461
+254	745
+254	668
+254	624
+254	1224
+255	464
+255	391
+255	113
+255	373
+255	992
+255	1225
+255	1226
+255	106
+255	1227
+255	1228
+256	1229
+256	1230
+256	1231
+256	1232
+257	1233
+257	1234
+257	1235
+257	1236
+257	1237
+258	1238
+259	1239
+259	1240
+259	100
+259	1241
+259	1242
+259	1243
+259	157
+259	137
+259	1244
+259	1245
+259	391
+259	1032
+260	67
+260	1246
+260	1247
+260	1248
+260	1249
+260	432
+260	1250
+260	1251
+260	97
+260	1252
+260	78
+260	1253
+260	1254
+260	971
+260	27
+260	768
+260	1255
+260	167
+261	1256
+261	1156
+261	1257
+261	1258
+261	1259
+261	656
+261	1260
+262	1261
+262	1262
+262	1263
+263	1264
+263	1045
+263	1265
+263	1266
+263	1267
+263	395
+263	1268
+263	1269
+264	1270
+264	391
+264	373
+264	992
+264	342
+265	1271
+265	1272
+265	1273
+265	1274
+265	1275
+265	1008
+265	1276
+265	1277
+265	1278
+265	1279
+265	75
+265	1280
+265	1012
+265	1281
+265	1282
+265	1283
+265	1284
+266	1285
+266	1286
+266	1287
+266	1288
+266	1289
+267	1290
+267	1291
+267	1292
+267	768
+267	1293
+268	1294
+268	319
+268	1295
+268	20
+268	768
+269	1231
+269	1296
+269	1297
+269	1298
+269	1232
+270	1299
+270	1300
+270	1301
+270	1302
+270	1303
+271	156
+271	1304
+271	1305
+271	646
+271	1306
+272	391
+272	1120
+272	22
+272	768
+272	143
+273	318
+273	98
+273	1307
+273	1308
+273	1309
+274	1310
+274	1311
+274	1312
+274	1313
+274	60
+274	1314
+274	764
+274	1315
+274	358
+274	111
+274	765
+274	606
+274	1316
+274	85
+274	31
+274	399
+274	1317
+275	1318
+275	1319
+275	1320
+275	1321
+275	1322
+275	1323
+275	1324
+275	1325
+275	1326
+275	1327
+275	1328
+275	1329
+276	1330
+276	139
+276	1331
+276	1332
+276	1333
+277	1334
+277	1335
+277	1336
+277	1337
+277	1338
+278	1339
+278	1340
+278	1341
+279	373
+279	22
+279	342
+279	768
+279	391
+280	1342
+280	1343
+280	1344
+280	1345
+280	1346
+280	791
+281	1347
+281	815
+281	272
+281	97
+281	40
+281	318
+282	1348
+282	1349
+282	240
+283	697
+283	319
+283	36
+283	22
+283	29
+284	1350
+284	399
+284	1351
+284	1352
+284	1353
+285	1354
+285	1355
+285	1356
+285	1357
+285	1358
+285	1359
+285	1360
+286	1361
+286	97
+286	135
+286	620
+286	56
+287	1362
+287	67
+287	1363
+287	1364
+287	1365
+287	20
+287	695
+287	1366
+287	29
+287	1367
+288	47
+288	67
+288	20
+288	48
+288	695
+289	1368
+289	1369
+289	1370
+289	1371
+289	1372
+289	1373
+289	1374
+289	136
+289	111
+289	1375
+289	1376
+289	1377
+289	1378
+289	424
+290	1379
+291	1380
+291	1381
+291	1382
+291	1383
+291	111
+292	1384
+293	1270
+293	342
+293	745
+293	624
+293	73
+294	107
+294	1385
+294	1386
+294	60
+294	1387
+295	1388
+295	1389
+295	1390
+295	1391
+296	299
+296	67
+296	1392
+296	159
+296	1393
+296	1278
+296	1394
+296	1395
+296	22
+296	1396
+296	1397
+296	157
+296	1398
+296	1399
+296	989
+296	944
+296	1400
+296	29
+297	1401
+297	1402
+297	1403
+297	1404
+297	1405
+298	1406
+299	1407
+299	1408
+299	1409
+299	1410
+299	1411
+299	1412
+300	256
+300	474
+300	1413
+300	1414
+300	1415
+301	67
+301	20
+301	1416
+301	1417
+301	1418
+302	720
+302	1419
+302	1420
+302	1421
+302	1422
+302	1423
+303	1424
+303	1425
+303	1426
+303	1427
+304	111
+304	449
+304	697
+304	1428
+305	1429
+305	1430
+305	1431
+305	431
+305	592
+305	1432
+305	1433
+305	1434
+305	1435
+305	1436
+305	1437
+306	581
+306	448
+306	319
+306	699
+306	1438
+307	696
+307	1439
+307	1440
+307	1441
+307	1442
+307	1443
+308	1444
+308	1445
+308	1446
+308	1447
+308	1448
+309	60
+309	1449
+309	1450
+309	1451
+309	85
+309	1452
+310	1453
+310	1454
+310	1455
+310	588
+310	691
+310	1456
+310	1457
+311	67
+311	1458
+311	1459
+311	20
+311	397
+311	27
+311	1460
+312	1461
+312	557
+312	127
+312	559
+312	1462
+313	256
+313	555
+313	127
+313	559
+313	1462
+314	1463
+314	1464
+314	1465
+314	1466
+314	1467
+315	1468
+315	1469
+315	1470
+315	1016
+315	1471
+315	1472
+315	391
+315	1473
+316	67
+316	474
+316	1474
+316	1475
+316	1476
+316	1477
+316	20
+316	97
+317	1478
+317	1479
+317	1480
+317	272
+317	29
+317	431
+317	1481
+317	1482
+317	644
+317	1181
+318	1483
+318	1484
+319	1485
+319	1486
+319	1487
+319	1488
+319	490
+320	49
+320	1489
+320	829
+320	1490
+320	136
+320	1491
+320	1466
+320	1492
+320	1493
+320	1494
+320	29
+321	1495
+321	1496
+321	1497
+321	73
+321	1498
+322	1499
+322	1500
+322	1501
+322	1502
+322	1503
+323	1504
+323	1505
+323	1506
+323	1507
+323	1508
+324	1509
+324	1510
+324	1511
+324	1512
+324	1513
+324	75
+325	461
+325	391
+325	373
+325	1514
+325	1515
+326	1516
+326	60
+326	885
+326	1517
+326	1518
+327	58
+327	1519
+327	1520
+327	432
+327	1521
+327	1522
+327	1523
+327	1524
+327	1525
+327	979
+327	881
+328	1526
+328	691
+328	1527
+328	1528
+328	1529
+328	1530
+329	1531
+329	1532
+329	1533
+329	1534
+329	1535
+329	1536
+329	1537
+329	1538
+330	1539
+330	1540
+331	1541
+331	1542
+331	1543
+331	1544
+331	49
+331	1545
+331	319
+331	335
+331	1546
+331	1547
+331	1548
+331	1549
+331	1550
+331	1031
+332	240
+332	815
+332	67
+332	1046
+332	27
+333	1551
+333	1113
+333	1552
+333	1553
+333	651
+334	1554
+334	1555
+\.
+
+
+--
+-- TOC entry 3368 (class 0 OID 28161)
+-- Dependencies: 210
+-- Data for Name: diseases; Type: TABLE DATA; Schema: public; Owner: rocco
+--
+
+COPY public.diseases (id, name) FROM stdin;
+1	Abdominal aortic aneurysm
+2	Acne
+3	Acute cholecystitis
+4	Acute lymphoblastic leukaemia
+5	Acute lymphoblastic leukaemia: Children
+6	Acute lymphoblastic leukaemia: Teenagers and young adults
+7	Acute myeloid leukaemia
+8	Acute myeloid leukaemia: Children
+9	Acute myeloid leukaemia: Teenagers and young adults
+10	Acute pancreatitis
+11	Adenomyosis
+12	Addison’s disease
+13	Alcohol-related liver disease
+14	Allergic rhinitis
+15	Allergies
+16	Alzheimer’s disease
+17	Anal cancer
+18	Anaphylaxis
+19	Angina
+20	Angioedema
+21	Ankylosing spondylitis
+22	Anorexia nervosa
+23	Anxiety
+24	Anxiety disorders in children
+25	Appendicitis
+26	Arterial thrombosis
+27	Arthritis
+28	Asbestosis
+29	Asthma
+30	Atopic eczema
+31	Atrial fibrillation
+32	Attention deficit hyperactivity disorder (ADHD)
+33	Autistic spectrum disorder (ASD)
+34	Bacterial vaginosis
+35	Benign prostate enlargement
+36	Bile duct cancer (cholangiocarcinoma)
+37	Binge eating
+38	Bipolar disorder
+39	Bladder cancer
+40	Blood poisoning (sepsis)
+41	Bone cancer
+42	Bone cancer: Teenagers and young adults
+43	Bowel cancer
+44	Bowel incontinence
+45	Bowel polyps
+46	Brain stem death
+47	Brain tumours
+48	Brain tumours: Children
+49	Brain tumours: Teenagers and young adults
+50	Breast cancer (female)
+51	Breast cancer (male)
+52	Bronchiectasis
+53	Bronchitis
+54	Bulimia
+55	Bunion
+56	Carcinoid syndrome and carcinoid tumours
+57	Catarrh
+58	Cellulitis
+59	Cerebral palsy
+60	Cervical cancer
+61	Chest infection
+62	Chest pain
+63	Chickenpox
+64	Chilblains
+65	Chlamydia
+66	Chronic fatigue syndrome
+67	Chronic kidney disease
+68	Chronic lymphocytic leukaemia
+69	Chronic myeloid leukaemia
+70	Chronic obstructive pulmonary disease
+71	Chronic pain
+72	Chronic pancreatitis
+73	Cirrhosis
+74	Clostridium difficile
+75	Coeliac disease
+76	Cold sore
+77	Coma
+78	Common cold
+79	Common heart conditions
+80	Congenital heart disease
+81	Conjunctivitis
+82	Constipation
+83	Coronavirus (COVID-19)
+84	Cough
+85	Crohn’s disease
+86	Croup
+87	Cystic fibrosis
+88	Cystitis
+89	Deafblindness
+90	Deep vein thrombosis
+91	Dehydration
+92	Dementia
+93	Dementia with Lewy bodies
+94	Dental abscess
+95	Depression
+96	Dermatitis herpetiformis
+97	Diabetes
+98	Diarrhoea
+99	Discoid eczema
+100	Diverticular disease and diverticulitis
+101	Dizziness (Lightheadedness)
+102	Down’s syndrome
+103	Dry mouth
+104	Dysphagia (swallowing problems)
+105	Dystonia
+106	Earache
+107	Earwax build-up
+108	Ebola virus disease
+109	Ectopic pregnancy
+110	Edwards’ syndrome
+111	Endometriosis
+112	Epilepsy
+113	Erectile dysfunction (impotence)
+114	Escherichia coli (E. coli) O157
+115	Ewing sarcoma
+116	Ewing sarcoma: Children
+117	Eye cancer
+118	Febrile seizures
+119	Feeling of something in your throat (Globus)
+120	Fever in adults
+121	Fever in children
+122	Fibroids
+123	Fibromyalgia
+124	Farting
+125	Flu
+126	Foetal alcohol syndrome
+127	Food poisoning
+128	Functional neurological disorder (FND)
+129	Fungal nail infection
+130	Gallbladder cancer
+131	Gallstones
+132	Ganglion cyst
+133	Gastroenteritis
+134	Gastro-oesophageal reflux disease (GORD)
+135	Genital herpes
+136	Genital symptoms
+137	Genital warts
+138	Germ cell tumours
+139	Glandular fever
+140	Gonorrhoea
+141	Gout
+142	Gum disease
+143	Haemorrhoids (piles)
+144	Hand, foot and mouth disease
+145	Hay fever
+146	Head and neck cancer
+147	Head lice and nits
+148	Headaches
+149	Hearing loss
+150	Heart attack
+151	Heart failure
+152	Hepatitis A
+153	Hepatitis B
+154	Hepatitis C
+155	Hiatus hernia
+156	High cholesterol
+157	HIV
+158	Hodgkin lymphoma
+159	Hodgkin lymphoma: Children
+160	Hodgkin lymphoma: Teenagers and young adults
+161	Huntington’s disease
+162	Hyperglycaemia (high blood sugar)
+163	Hyperhidrosis
+164	Hypoglycaemia (low blood sugar)
+165	Idiopathic pulmonary fibrosis
+166	Impetigo
+167	Indigestion
+168	Ingrown toenail
+169	Inherited heart conditions
+170	Insomnia
+171	Iron deficiency anaemia
+172	Irritable bowel syndrome (IBS)
+173	Itching
+174	Itchy bottom
+175	Kaposi’s sarcoma
+176	Kidney cancer
+177	Kidney infection
+178	Kidney stones
+179	Labyrinthitis
+180	Lactose intolerance
+181	Laryngeal (larynx) cancer
+182	Laryngitis
+183	Leg cramps
+184	Lichen planus
+185	Lipoedema
+186	Liver cancer
+187	Liver disease
+188	Liver tumours
+189	Loss of libido
+190	Lung cancer
+191	Lupus
+192	Lyme disease
+193	Lymphoedema
+194	Lymphogranuloma venereum (LGV)
+195	Malaria
+196	Malignant brain tumour (cancerous)
+197	Malnutrition
+198	Measles
+199	Meningitis
+200	Menopause
+201	Mesothelioma
+202	Middle ear infection (otitis media)
+203	Migraine
+204	Miscarriage
+205	Motor neurone disease (MND)
+206	Mouth cancer
+207	Mouth ulcer
+208	Multiple myeloma
+209	Multiple sclerosis (MS)
+210	Mumps
+211	Meniere’s disease
+212	Myasthenia gravis
+213	Nasal and sinus cancer
+214	Nasopharyngeal cancer
+215	Neuroblastoma: Children
+216	Neuroendocrine tumours
+217	Non-alcoholic fatty liver disease (NAFLD)
+218	Non-Hodgkin lymphoma
+219	Non-Hodgkin lymphoma: Children
+220	Norovirus
+221	Nosebleed
+222	Obesity
+223	Obsessive compulsive disorder (OCD)
+224	Obstructive sleep apnoea
+225	Oesophageal cancer
+226	Oral thrush in adults
+227	Osteoporosis
+228	Osteosarcoma
+229	Outer ear infection (otitis externa)
+230	Ovarian cancer
+231	Ovarian cancer: Teenagers and young adults
+232	Ovarian cyst
+233	Overactive thyroid
+234	Paget’s disease of the nipple
+235	Pancreatic cancer
+236	Panic disorder
+237	Parkinson’s disease
+238	Patau’s syndrome
+239	Pelvic inflammatory disease
+240	Pelvic organ prolapse
+241	Penile cancer
+242	Peripheral neuropathy
+243	Personality disorder
+244	Pleurisy
+245	Pneumonia
+246	Polycystic ovary syndrome (PCOS)
+247	Polymyalgia rheumatica
+248	Post-polio syndrome
+249	Post-traumatic stress disorder (PTSD)
+250	Postnatal depression
+251	Pregnancy and baby
+252	Pressure ulcers
+253	Prostate cancer
+254	Psoriasis
+255	Psoriatic arthritis
+256	Psychosis
+257	Pubic lice
+258	Rare tumours
+259	Raynaud’s phenomenon
+260	Reactive arthritis
+261	Restless legs syndrome
+262	Retinoblastoma: Children
+263	Rhabdomyosarcoma
+264	Rheumatoid arthritis
+265	Ringworm and other fungal infections
+266	Rosacea
+267	Scabies
+268	Scarlet fever
+269	Schizophrenia
+270	Scoliosis
+271	Septic shock
+272	Shingles
+273	Shortness of breath
+274	Sickle cell disease
+275	Sinusitis
+276	Sjogren’s syndrome
+277	Skin cancer (melanoma)
+278	Skin cancer (non-melanoma)
+279	Skin rashes in children
+280	Slapped cheek syndrome
+281	Soft tissue sarcomas
+282	Soft tissue sarcomas: Teenagers and young adults
+283	Sore throat
+284	Spleen problems and spleen removal
+285	Stillbirth
+286	Stomach ache and abdominal pain
+287	Stomach cancer
+288	Stomach ulcer
+289	Streptococcus A (strep A)
+290	Stress, anxiety and low mood
+291	Sudden infant death syndrome (SIDS)
+292	Suicide
+293	Sunburn
+294	Supraventricular tachycardia
+295	Swollen glands
+296	Syphilis
+297	Testicular cancer
+298	Testicular cancer: Teenagers and young adults
+299	Testicular lumps and swellings
+300	Thirst
+301	Threadworms
+302	Thrush
+303	Thyroid cancer
+304	Thyroid cancer: Teenagers and young adults
+305	Tinnitus
+306	Tonsillitis
+307	Tooth decay
+308	Toothache
+309	Transient ischaemic attack (TIA)
+310	Trigeminal neuralgia
+311	Tuberculosis (TB)
+312	Type 1 diabetes
+313	Type 2 diabetes
+314	Trichomonas infection
+315	Transverse myelitis
+316	Ulcerative colitis
+317	Underactive thyroid
+318	Urinary incontinence
+319	Urinary tract infection (UTI)
+320	Urinary tract infection (UTI) in children
+321	Urticaria (hives)
+322	Vaginal cancer
+323	Vaginal discharge
+324	Varicose eczema
+325	Venous leg ulcer
+326	Vertigo
+327	Vitamin B12 or folate deficiency anaemia
+328	Vomiting in adults
+329	Vulval cancer
+330	Warts and verrucas
+331	Whooping cough
+332	Wilms’ tumour
+333	Womb (uterus) cancer
+334	Yellow fever
+\.
+
+
+--
+-- TOC entry 3370 (class 0 OID 28172)
+-- Dependencies: 212
+-- Data for Name: symptoms; Type: TABLE DATA; Schema: public; Owner: rocco
+--
+
+COPY public.symptoms (id, name) FROM stdin;
+1	feeling faint
+2	rapid heartbeat
+3	- pulsating feeling in the stomach\n- persistent back pain\n- persistent abdominal pain\n- sudden and severe pain in the abdomen\n- dizziness
+4	loss of consciousness
+5	shortness of breath
+6	sweaty and clammy skin
+7	papules
+8	oily skin
+9	cysts
+10	blackheads
+11	nodules
+12	pustules
+13	whiteheads
+14	spots
+15	a bulge in the abdomen
+16	sudden sharp pain in the upper right side of the tummy
+17	tenderness in the abdomen
+18	nausea and vomiting
+19	jaundice
+20	loss of appetite
+21	pain spreading towards the right shoulder
+22	fever
+23	sweating
+24	feeling tired and breathless
+25	unusual and frequent bleeding
+26	repeated infections
+27	high temperature (fever)
+28	pale skin
+29	tiredness
+30	prolonged bleeding
+31	infections
+32	bruises
+33	lethargy
+34	fever and sweats
+35	aches and pains in bones
+36	swollen glands
+37	headaches and visual disturbance
+38	looking paler than usual and feeling tired
+39	feeling unwell and run down
+40	breathlessness
+41	frequent infections
+42	bruising
+43	aches and pains in your bones
+44	headaches and blurred vision
+45	bruises or bleeding
+46	swollen glands (lymph nodes)
+47	nausea
+48	indigestion
+49	vomiting
+50	dull pain in the center of the abdomen
+51	severe
+52	diarrhea
+53	a feeling of pressure in your tummy
+54	severe period pain
+55	heavy periods that last for a long time
+56	bloating
+57	exhaustion
+58	muscle weakness
+59	low mood
+60	dizziness
+61	loss of appetite and unintentional weight loss
+62	fatigue
+63	cramps
+64	fainting
+65	increased thirst
+66	swelling in the ankles and tummy
+67	weight loss
+68	confusion or drowsiness
+69	feeling sick
+70	vomiting blood or passing blood in stools
+71	yellowing of the eyes and skin (jaundice)
+72	blocked or runny nose
+73	itchiness
+74	sneezing
+75	itchy
+76	runny or blocked nose
+77	red
+78	watery eyes
+79	itchy rash
+80	wheezing and coughing
+81	problems moving around without assistance
+82	memory problems
+83	personality changes
+84	difficulty planning or making decisions
+85	confusion
+86	problems with speech and language
+87	disorientation
+88	- bleeding from the bottom (rectal bleeding)\n- itching and pain around the anus\n- small lumps around the anus\n- a discharge of mucus from the anus\n- loss of bowel control (bowel incontinence)
+89	and feet
+90	throat
+91	swollen eyes
+92	red skin rash
+93	swelling of the mouth
+94	feeling lightheaded or faint
+95	and vomiting
+96	collapse and unconsciousness
+97	abdominal pain
+98	wheezing
+99	itchy skin or a raised
+100	lips
+101	hands
+102	or tongue causing breathing and swallowing difficulties
+103	jaw or back
+104	pain spreading to arms
+105	triggered by physical exertion
+106	neck
+107	chest pain
+108	swelling of the throat
+109	swollen skin
+110	swelling of the eyes
+111	difficulty breathing
+112	hot or painful sensation in swollen areas
+113	knees
+114	and ribs)
+115	pain and swelling in other parts of the body (such as hips
+116	enthesitis
+117	back pain and stiffness
+118	arthritis
+119	more hair on the face
+120	or face
+121	feeling light-headed or dizzy
+122	bloating or constipation
+123	keeping body weight low to the point of being unhealthy
+124	pain in the abdomen
+125	low blood pressure (hypotension)
+126	fine downy hair (lanugo) growing on the body
+127	feeling very tired
+128	swelling in feet
+129	restricting food intake
+130	slow or irregular heartbeat
+131	pubic hair becoming sparse and thin
+132	problems with self-esteem and body image when it comes to food and weight
+133	fear of 'being fat' or gaining weight
+134	feeling cold or having a low body temperature
+135	stomach ache
+136	irritability
+137	pins and needles
+138	fast or irregular heartbeat (palpitations)
+139	dry mouth
+140	difficulty concentrating
+141	excessive sweating
+142	muscle aches and tension
+143	headache
+144	a noticeably strong
+145	trembling or shaking
+146	feeling constantly “on edge”
+147	a sense of dread
+148	difficulty falling or staying asleep (insomnia)
+149	restlessness
+150	or waking in the night\n- not eating properly\n- quickly getting angry or irritable
+151	and being out of control during outbursts\n- constantly worrying or having negative thoughts\n- feeling tense and fidgety
+152	- finding it hard to concentrate\n- not sleeping
+153	or using the toilet often\n- always crying\n- being clingy all the time (when other children are ok)\n- complaining of tummy aches and feeling unwell\n- being withdrawn and not wanting to do things they used to enjoy
+154	clammy skin
+155	angina
+156	weakness
+157	numbness
+158	heart attack
+159	stroke
+160	peripheral vascular disease
+161	weakness and muscle wasting
+162	inflammation in and around the joints
+163	tenderness and stiffness
+164	restricted movement of the joints
+165	red skin over the affected joint
+166	warm
+167	joint pain
+168	persistent cough
+169	tight chest
+170	"wheezing
+171	coughing"
+172	red skin
+173	itchy skin
+174	cracked skin
+175	dry skin
+176	sore skin
+177	fast and irregular heartbeat (palpitations)
+178	little or no sense of danger
+179	being unable to sit still
+180	easily irritable
+181	being unable to wait their turn
+182	hard to wait
+183	short attention span
+184	hard to organise tasks
+185	constantly changing activity or task
+186	hard to listen to others
+187	difficulty organising tasks
+188	restless or edgy
+189	difficulty handling stress
+190	constant fidgeting
+191	impulsiveness
+192	inattentiveness
+193	hyperactivity
+194	excessive talking
+195	forgetful
+196	constantly fidgeting
+197	excessive physical movement
+198	acting without thinking
+199	easily distracted
+200	hard to follow instructions
+201	impulsivity
+202	hard to notice details
+203	interrupting conversations
+204	repetitive movements
+205	strong reactions to sensory stimuli
+206	difficulty making and maintaining friendships
+207	delayed speech
+208	struggling with changes in routine
+209	- change in normal vaginal discharge\n- white or grey discharge\n- thin or watery discharge\n- strong fishy odor\n- discharge more noticeable during and after sex
+210	and during periods
+211	difficulty starting urination
+212	frequent need to urinate
+213	difficulty fully emptying the bladder
+214	frequent nighttime urination
+215	weak flow of urine
+216	unintentional weight loss
+217	eating much faster than normal
+218	shame or disgust afterwards
+219	eating until you feel uncomfortably full
+220	eating a large amount of food when you’re not hungry
+221	eating alone or secretly due to being embarrassed about the amount of food you’re consuming
+222	having feelings of guilt
+223	feeling very happy
+224	talking quickly
+225	hopelessness
+226	difficulty sleeping
+227	not feeling like sleeping
+228	not eating
+229	loss of energy
+230	feeling sad
+231	feeling self-important
+232	delusional thinking
+233	lack of appetite
+234	suicidal thoughts
+235	burning sensation when passing urine
+236	frequent urination
+237	swelling of the legs
+238	pelvic pain
+239	sudden urges to urinate
+240	blood in urine
+241	bone pain
+242	severe muscle pain
+243	a high temperature (fever) or low body temperature
+244	chills and shivering
+245	feeling dizzy or faint
+246	diarrhea.
+247	slurred speech
+248	a change in mental state – like confusion or disorientation
+249	cold
+250	clammy and pale or mottled skin
+251	a fast heartbeat
+252	severe breathlessness
+253	fast breathing
+254	swelling and redness (inflammation) over a bone making movement difficult if the bone is near a joint
+255	weak bone that breaks (fractures) more easily than normal
+256	unexplained weight loss
+257	persistent bone pain that gets worse over time and continues into the night
+258	high temperature (fever) of 38c (100.4f) or above
+259	noticeable lump over a bone
+260	sweating particularly at night
+261	swelling around the affected area of bone
+262	a broken bone
+263	pain or tenderness
+264	reduced movement
+265	changes in bowel habit
+266	blood in the stools
+267	urge bowel incontinence
+268	daily basis occurrence
+668	dry
+269	more common in elderly people
+270	passive incontinence
+271	slight soiling
+272	constipation
+273	rectal bleeding
+274	mucus production
+275	failure to respond to outside stimulation
+276	symptoms not caused by drug overdose
+277	severe under-activity of the thyroid gland
+278	maintenance of heartbeat and breathing using a ventilator
+279	low body temperature
+280	unconsciousness
+281	diagnosis of serious brain damage without cure
+282	persistent headaches
+283	seizures (fits)
+284	vomiting and drowsiness
+285	mental or behavioural changes
+286	speech problems
+287	vision problems
+288	persistent nausea
+289	progressive weakness or paralysis on one side of the body
+290	eye problems such as abnormal eye movements
+291	blurring
+292	headaches (often worse in the morning)
+293	feeling very irritated or losing interest in day-to-day things
+294	or double vision
+295	vomiting (usually in the morning) or feeling sick
+296	feeling extremely sleepy (drowsy) for no reason
+297	fits (seizures)
+298	feeling very tired much more quickly than usual
+299	headaches
+300	changes in balance and walking
+301	feeling irritated or losing interest in day-to-day activities
+302	problems with eyes such as blurring or double vision
+303	feeling more sleepy or drowsy than usual
+304	problems with speech
+305	weakness down one side of the body
+306	discharge from either of your nipples (which may be streaked with blood)
+307	dimpling on the skin of your breasts"
+308	a change in the size or shape of one or both breasts
+309	"a lump or area of thickened tissue in either breast
+310	a lump or swelling in either of your armpits
+311	nipple discharge
+312	hard lump in breast
+313	nipple ulceration
+314	painless lump in breast
+315	nipple retraction
+316	persistent cough bringing up phlegm
+317	coughing up blood
+318	cough
+319	sore throat
+320	yellow-grey mucus (phlegm)
+321	focus on food
+322	focusing on body image
+323	bingeing
+324	problems with self-esteem
+325	purging
+326	difficulty walking
+327	pain and stiffness of the big toe joint
+328	swelling of the big toe joint
+329	feeling or being sick)
+330	fast heart rate
+331	bleeding from the bottom (rectal bleeding)
+332	blocked bowel (diarrhoea
+333	flushing of the skin
+334	tummy pain
+335	runny nose
+336	constant need to clear your throat
+337	feeling of mucus running down the back of your throat
+338	feeling that your throat is blocked
+339	blocked or stuffy nose that you can’t clear
+340	vigorous shaking (rigors)
+341	hot
+342	redness
+343	swollen
+344	tender
+345	painful
+346	problems with vision
+347	drinking and swallowing
+348	experience pain symptoms
+349	struggle to speak
+350	have difficulties with eating
+351	struggle with movement and balance
+352	unusual vaginal bleeding
+353	pain and discomfort during sex
+354	unpleasant smelling vaginal discharge
+355	feeling confused
+356	joint and muscle pain.
+357	coughing up yellow or green phlegm
+358	high temperature
+359	rapid and shallow breathing
+360	chest pain and breathlessness
+361	rapid heart beat
+362	tightness or squeezing
+363	difficulty breathing (snoring or rasping)
+364	or both arms
+365	central chest pain or discomfort in the chest that doesn’t go away – it may feel like pressure
+366	pain that radiates down the left arm
+367	or to the neck
+368	jaw
+369	back or stomach
+370	sweating or coughing up blood
+371	aching muscles
+372	burning or itching feeling in the affected areas
+373	swelling
+374	pus coming out of skin
+375	skin turning red or dark blue
+376	sores or blisters
+377	penis or anus
+378	pain in the lower tummy
+379	pain when peeing
+380	bleeding after sex and between periods
+381	sticky eyes
+382	pain in the testicles
+383	unusual discharge from the vagina
+384	broken sleep
+385	problems with concentration
+386	speech and language problems
+387	muscle pain
+388	being very sensitive to light and sound
+389	feeling generally unwell
+390	thinking and memory (‘brain fog’)
+391	pain
+392	poor temperature control
+393	swollen ankles
+394	feet or hands (due to water retention)
+395	blood in the urine
+396	a high temperature (fever)
+397	night sweats
+398	getting infections often
+399	anaemia
+400	bleeding and bruising more easily than normal
+401	feeling of bloating
+402	frequent chest infections
+403	a persistent cough with phlegm
+404	increasing breathlessness when active
+405	there are no specific symptoms mentioned in the text. \n\ncommon symptoms of chronic pain may include:\n\n- persistent pain that lasts longer than 12 weeks\n- fatigue\n- sleep disturbances\n- mood changes (such as anxiety or depression)\n- reduced physical activity
+406	greasy
+407	foul-smelling stools
+408	ankles
+409	insomnia
+410	shivering
+411	memory loss
+412	swelling in the abdomen
+413	tendency to bleed and bruise easily
+414	tenderness or pain around the liver area
+415	muscle wasting
+416	swelling in the legs
+417	hair loss
+418	tiny red lines on the skin above waist level
+419	yellowing of the skin and eyes (jaundice)
+420	changes in personality
+421	very itchy skin
+422	watery diarrhoea
+423	painful tummy cramps
+424	signs of dehydration
+425	sudden or unexpected weight loss
+426	cramping or bloating
+427	recurrent stomach pain
+428	severe diarrhoea
+429	iron
+430	vitamin b12 or folic acid deficiency
+431	depression
+432	mouth ulcers
+433	repeated miscarriages
+434	persistent or unexplained gastrointestinal symptoms such as nausea and vomiting
+435	skin rash (dermatitis herpetiformis)
+436	excessive wind and/or constipation
+437	neurological (nerve) problems such as ataxia and peripheral neuropathy.
+438	producing more saliva than normal
+439	headaches.
+440	dehydration
+441	painful sores
+442	feeling sick (nausea)
+443	swollen and irritated gums with small
+444	unresponsive
+445	minimal brain activity
+446	reduced reflexes
+447	closed eyes
+448	earache
+449	hoarse voice
+450	feeling of pressure in ears and face
+451	mild irritation of eyes
+452	loss of taste and smell
+453	muscle aches
+454	dizziness or fainting
+455	chest pain (angina or palpitations)
+456	severe tiredness
+457	feeding difficulties
+458	palpitations
+459	delayed growth
+460	poor appetite
+461	itching
+462	burning or gritty feeling
+463	pus on eyelashes
+464	inflammation
+465	watering
+466	feeling bloated
+467	loss of or change in normal sense of taste or smell
+468	fever or chills
+469	continuous cough
+470	breathing difficulties
+471	persistent change in voice
+472	abdominal pain and cramping
+473	blood and mucus in poo
+474	extreme tiredness (fatigue)
+475	unintended weight loss
+476	recurring diarrhoea
+477	a bark-like cough
+478	a hoarse or croaky voice
+479	stridor
+480	frequent
+481	diarrhoea
+482	difficulty putting on weight
+483	occasional wheezing and shortness of breath
+484	wet-sounding coughs
+485	recurring chest infections
+486	needing to pee more often and urgently than normal
+487	urine that’s dark
+488	achy
+489	burning or stinging when you pee
+490	pain low down in your tummy
+491	sick and tired
+492	cloudy or strong smelling
+493	or sitting close to the television
+494	slowly and more clearly
+495	asking others to speak loudly
+496	difficulty moving around unfamiliar places
+497	needing to hold books or newspapers very close
+498	not hearing noises such as a knock at the door
+499	difficulty following a conversation
+500	needing to turn up the volume on the television or radio
+501	heavy ache in the affected area
+502	tenderness in the leg
+503	red skin below the knee.
+504	warm skin in the area of the clot
+505	thirsty
+506	dark-colored urine
+507	lightheaded
+508	- memory loss\n- difficulty with problem-solving or complex tasks\n- confusion\n- changes in mood or behavior\n- difficulty with communication
+509	falls
+510	unsteadiness
+511	stiff limbs
+512	slowed movement
+513	recurrent visual hallucinations
+514	sleep disturbances
+515	tremors
+516	and/or loose tooth
+517	throbbing pain in the affected tooth or gum\n- pain spreading to ear
+518	- intense
+519	discolored
+520	and neck\n- pain exacerbated when lying down\n- redness and swelling in the face\n- tender
+521	losing motivation
+522	speaking or moving slower than usual
+523	feeling helpless
+524	low self-esteem
+525	thinking about harming yourself
+526	thinking about suicide
+527	feeling hopeless
+528	losing interest in things
+529	aches and pains that can’t be explained
+530	feeling worried
+531	finding it hard to make decisions
+532	avoiding talking to or spending time with friends
+533	feeling irritable
+534	taking part in fewer social activities
+535	feeling anxious
+536	feeling tearful
+537	difficulties with family or home life
+538	disturbed sleep
+539	neglecting interests and hobbies
+540	not getting any enjoyment in life
+541	losing
+542	loss of interest in sex
+543	feeling guilty
+544	continuous sadness or low mood
+545	or sometimes gaining
+546	doing poorly at work
+547	appetite or weight
+548	raised patches
+549	severe itching
+550	blisters
+551	affected areas: elbows
+552	stinging
+553	buttocks
+554	cuts or wounds that heal slowly
+555	blurred vision
+556	itching around the penis or vagina
+557	weight loss and loss of muscle bulk
+558	urinating more frequently than usual
+559	feeling very thirsty
+560	watery stool
+561	dark or black stool
+562	circular or oval patches
+563	reddened skin
+564	more severe abdominal pain
+565	lower abdominal pain
+566	double vision
+567	vertigo
+568	ringing in the ears (tinnitus)
+569	such as heart issues
+570	reduced hearing or vision.
+571	certain conditions may be more common among individuals with down's syndrome
+572	digestion issues
+573	muscle tone problems
+574	swollen mouth
+575	swallowing or talking
+576	problems with sense of taste
+577	painful mouth
+578	red mouth
+579	difficulty chewing
+580	choking
+581	coughing
+582	sensation of food stuck in throat or chest
+583	bringing food back up
+584	twisting of body parts
+585	shaking (tremors)
+586	excessive blinking
+587	uncontrolled muscle spasms
+588	sharp
+589	severe sore throat
+590	dull or burning pain in one or both ears
+591	ear pain
+592	hearing loss
+593	itchiness in or around the ear
+594	ear infections
+595	tinnitus
+596	joint and muscle pain
+597	severe muscle weakness
+598	pain low down and on one side of your abdomen
+599	bleeding from your vagina
+600	pain in the tip of your shoulder
+601	discomfort when going to the toilet
+602	a brown watery discharge from your vagina
+603	cleft lip and/or palate
+604	joint contractures
+605	heart issues
+606	seizures
+607	heavy or prolonged (long lasting) periods
+608	painful periods
+609	pain during ovulation
+610	pelvis
+611	spotting or bleeding between periods
+612	lower back or legs
+613	pain in the lower abdomen (tummy)
+614	intense feeling of fear or joy
+615	odd feeling with no loss of awareness
+616	convulsions
+617	"trance-like" state
+618	repeated seizures
+619	"inability to get an erection"
+620	stomach cramps
+621	kidney failure
+622	bloody diarrhoea
+623	pain in the affected area
+624	tenderness
+625	limp
+626	pain (especially worse at night)
+627	shadows
+628	bulging of one eye
+629	lump on eyelid or in eye increasing in size
+630	partial or total loss of vision
+631	dark patch in eye getting bigger
+632	pain in or around eye
+633	flashes of light
+634	wiggly lines in vision
+635	twitching of arms and legs
+636	wetting oneself
+637	stiff body
+638	tonic clonic seizure
+639	tightness in the throat
+640	feeling of something stuck in the throat
+641	discomfort in the throat
+642	mucus that cannot be cleared
+643	dark urine
+644	muscle cramps
+645	shivery
+646	chills
+647	persistent vomiting
+648	a frequent need to urinate
+649	tummy (abdominal) pain
+650	lower back pain
+651	heavy periods
+652	burning sensations in hands and feet
+653	temperature
+654	problems with memory and concentration
+655	irritable bowel syndrome (ibs)
+656	tingling
+657	muscle stiffness
+658	feeling too hot or too cold
+659	light
+660	unusually painful periods
+661	noise
+662	widespread pain
+663	anxiety
+664	restless legs syndrome
+665	increased sensitivity to touch
+666	diarrhea or tummy pain
+667	general aches and pains
+669	sudden high temperature
+670	tiredness and weakness
+671	pain in the ear
+672	chesty cough
+673	feeling sick and being sick
+674	being less active
+675	premature birth
+676	miscarriage
+677	underweight baby
+678	lack of energy and weakness
+679	stomach cramps and abdominal pain
+680	being sick (vomiting)
+681	arm and leg weakness
+682	chronic pain
+683	thickening and distortion of the nail
+684	skin nearby becoming infected
+685	brittle or crumbly nails
+686	pain or discomfort
+687	discolouration of the nail
+688	swollen stomach
+689	persistent pain
+690	no symptoms mentioned in the text
+691	sudden
+692	mild fever
+693	oesophagitis
+694	bloating and belching
+695	heartburn
+696	bad breath
+697	difficulty swallowing
+698	feeling or being sick
+699	pain when swallowing
+700	acid reflux
+701	head of penis or anus
+702	vaginal discharge
+703	pain inside the vagina
+704	armpits and neck
+705	backache
+706	flu-like symptoms
+707	pain peeing or being unable to pee
+708	spots or red bumps around the genital area
+709	mild swelling of the lymph glands in the groin
+710	a temperature
+711	multiple painful genital ulcers
+712	change in vaginal bleeding pattern
+713	severe pain
+714	spots or lumps on the genitals
+715	change in vaginal discharge
+716	ulcers on the genitals
+717	discharge from the end of the penis
+718	swelling or inflammation around the testicles
+719	bleeding
+720	irritation
+721	rough lumps on the skin
+722	small
+723	painless lumps or growths
+724	tumour markers in blood
+725	lump
+726	swollen glands in the neck
+727	severely sore throat
+728	fatigue (extreme tiredness)
+729	pain or a burning sensation when peeing
+730	green or yellow fluid coming out of the penis
+731	discomfort and swelling of the testicles
+732	bleeding in between periods or after sex
+733	increased discharge from the vagina
+734	shiny skin over the affected joint
+735	swelling in and around the affected joint
+736	joint feeling hot and very tender
+737	severe pain in one or more joints
+738	loose teeth
+739	gum abscesses
+740	red and swollen gums
+741	bleeding gums after brushing or flossing
+742	mucus discharge after passing a stool
+743	lump hanging down outside of the anus
+744	bleeding after passing a stool
+745	soreness
+746	swelling around the anus
+747	itchy bottom
+748	feeling unwell
+749	sore throat.
+750	frequent sneezing
+751	itchy red or watery eyes (allergic conjunctivitis)
+752	itchy throat
+753	lump or swelling in neck
+754	lump in mouth
+755	persistent mouth ulcers
+756	change in voice
+757	irritability about sights of lice
+758	rash on the back of the neck
+759	feeling as though something is moving in the hair
+760	itchy scalp
+761	small white eggs or nits in the hair
+762	very high temperature
+763	jaw pain while chewing
+764	drowsiness
+765	stiff neck
+766	feeling weak
+767	feeling hot and shivery
+768	rash
+769	severe pain and redness in one eye
+770	sore scalp
+771	difficulty hearing the telephone or doorbell
+772	feeling tired or stressed from having to concentrate while listening
+773	asking people to repeat themselves
+774	finding it difficult to tell which direction noise is coming from
+775	listening to music or watching television with the volume higher than others need
+776	difficulty hearing other people clearly
+777	central chest pain or discomfort
+778	or stomach
+779	back
+780	radiating pain down left arm or both arms
+781	"breathlessness
+782	tiredness or fatigue
+783	swelling in the legs or ankles"
+784	raised
+785	dark pee
+786	upper-right part of your tummy becoming swollen and tender
+787	itchy rash (hives)
+788	sore throat and cough
+789	constipation or diarrhea
+790	pain in the upper-right part of your tummy
+791	a headache
+792	pale poo
+793	feeling tired and generally unwell
+794	yellowing of the skin and eyes
+795	feeling and being sick
+796	indigestion or bloating
+797	joint and muscle aches and pain
+798	mood swings
+799	feeling tired all the time
+800	depression or anxiety
+801	brain fog
+802	abdominal pain.
+803	unpleasant sour taste in mouth
+804	gord
+805	swallowing problems
+806	- narrowing of the arteries (atherosclerosis)\n- heart attack\n- stroke\n- transient ischaemic attack (tia) - often known as a “mini stroke”\n- peripheral arterial disease (pad)
+807	body rash
+808	skin problems
+809	chronic diarrhea
+810	recurrent infections
+811	serious life-threatening illnesses
+812	painless swelling in lymph nodes
+813	persistent cough or breathlessness
+814	painless swelling of lymph nodes
+815	painless lump
+816	itching of the skin
+817	high temperatures
+818	rapid decline in school performance
+819	communication problems
+820	behavioural changes
+821	difficulty eating
+822	uncontrollable movements
+823	lack of emotions
+824	psychiatric problems
+825	balance problems
+826	apathy
+827	movement problems
+828	aggression
+829	needing to pee frequently
+830	and groin
+831	social withdrawal
+832	sweating affecting specific areas like armpits
+833	soles of feet
+834	palms
+835	emotional distress
+836	face
+837	chest
+838	feeling hungry
+839	fast pulse or palpitations
+840	tingling lips
+841	trembling or shakiness
+842	feeling unusually tired in the morning
+843	disorderly or irrational behavior
+844	going pale
+845	damp sheets or clothing from sweating
+846	persistent dry cough
+847	loss of appetite and weight loss
+848	rounded and swollen fingertips (clubbed fingers)
+849	golden crusts on the sores\n- itchiness\n- fever (rare)\n- swollen glands (rare)
+850	- red sores around the nose and mouth\n- thick
+851	bringing up (regurgitating) fluid or food into the gullet (oesophagus)
+852	feeling full or bloated
+853	belching
+854	sudden cardiac death
+855	family history of the condition
+856	unexplained fainting
+857	fainting or blackouts
+858	"difficulty falling asleep
+859	early morning awakenings
+860	waking up several times during the night
+861	not feeling refreshed"
+862	difficulty staying asleep
+863	pale complexion"
+864	lack of energy (lethargy)
+865	heart palpitations
+866	"tiredness
+867	excessive wind (flatulence)
+868	change in bowel habits (diarrhoea
+869	urgent need to move bowels
+870	cramping
+871	abdominal (stomach) pain
+872	constipation)
+873	pain and blood when pooing
+874	presence of worms in poo
+875	sores
+876	itching at night
+877	poo leaking or inability to control bowel movements
+878	uncomfortable swelling in the arms or legs (lymphoedema)
+879	stomach pain and diarrhea
+880	coughing up blood and chest pain
+881	extreme tiredness
+882	lump or swelling in the kidney area
+883	constant pain in the side below the ribs
+884	lower back or around your genitals
+885	feeling sick or being sick
+886	feeling very weak or tired
+887	pain and discomfort in your side
+888	shivering or chills
+889	pain in the abdomen or groin
+890	a persistent ache in the lower back
+891	ringing or humming in ear(s)
+892	feeling sick (nausea)"
+893	"vertigo
+894	feeling of pressure inside ear(s)
+895	bloated stomach
+896	flatulence
+897	stomach rumbling
+898	stomach cramps and pains
+899	long-lasting cough
+900	high-pitched wheezing noise
+901	persistent sore throat
+902	change in voice (hoarseness)
+903	difficulty speaking
+904	hoarseness
+905	irritating cough
+906	cramping in calf muscles
+907	sudden pain in leg muscles
+908	cramping in feet and thighs
+909	tight and painful muscles
+910	slightly raised bumps (papules)
+911	white streaks (wickham’s striae)
+912	burning and rawness around the vulva
+913	burning and discomfort in the mouth
+914	ulcers in the mouth and genital areas.
+915	thicker scaly patches
+916	painful red gums
+917	white patches in the mouth
+918	discolored skin
+919	swelling worsening in the afternoon
+920	heaviness or tenderness in affected areas
+921	enlargement of legs and arms
+922	spider veins or varicose veins on legs
+923	discomfort
+924	dimpled legs with lumpy texture
+925	easy bruising
+926	feeling very full after eating
+927	feeling sick and vomiting
+928	feeling very tired and weak
+929	pain or swelling in your abdomen
+930	jaundice (yellowing of skin and eyes)
+931	lump or swelling in the abdomen
+932	relationship problems
+933	drugs and alcohol
+934	other medical conditions
+935	medication
+936	contraception
+937	getting older
+938	hormonal problems
+939	stress
+940	persistent breathlessness
+941	a persistent cough
+942	unexplained tiredness and weight loss
+943	an ache or pain when breathing or coughing
+944	swollen lymph glands
+945	rashes
+946	neck stiffness
+947	circular rash
+948	repeated skin infections
+949	difficulty with movement
+950	heavy feeling
+951	aching
+952	constipation or painful straining or diarrhea.
+953	pain in the anal area when pooing
+954	blood or pus from the anus
+955	vagina or around the anus
+956	ulcer or sore on the penis
+957	swollen lymph glands in the groin
+958	muscle aches or pains
+959	vomiting and/or diarrhea
+960	sweats
+961	poor concentration
+962	changes in mood
+963	tiredness or low energy levels
+964	reduced ability to perform everyday tasks
+965	unplanned weight loss
+966	aches and pains
+967	small greyish-white spots in the mouth
+968	sore
+969	measles rash
+970	cold-like symptoms
+971	red eyes
+972	general lack of energy
+973	blotchy rash that doesn't fade when a glass is rolled over it
+974	dislike of bright lights
+975	drowsiness or unresponsiveness
+976	being sick
+977	clubbed (swollen) fingertips
+978	slight hearing loss
+979	lack of energy
+980	intense headache on one side of the head
+981	increased sensitivity to light and sound
+982	feeling very hot or very cold
+983	heavy bleeding
+984	bleeding from vagina
+985	absence of baby's movements
+986	cramping pain
+987	change in baby's movements
+988	concentration difficulties
+989	paralysis
+990	speaking difficulties
+991	excess saliva
+992	stiffness
+993	swallowing difficulties
+994	drooling
+995	difficulty lifting
+996	twitching of muscles
+997	joint aches
+998	changes in mental abilities
+999	emotional lability
+1000	weakened grip
+1001	excessive yawning
+1002	a lump
+1003	pain or difficulty when swallowing
+1004	red or white patches in the mouth or throat
+1005	persistent pain in the mouth
+1006	ulcers
+1007	ulcers may spread or grow
+1008	yellow
+1009	round or oval sores
+1010	or grey in color
+1011	painful sores in the mouth
+1012	white
+1013	multiple ulcers at a time
+1014	bone fractures
+1015	abnormal sensations
+1016	mobility problems
+1017	muscle spasms
+1018	painful swellings at the side of the face under the ears
+1019	feeling tired
+1020	mild stomach (abdominal) pain
+1021	feeling of pressure or fullness deep inside the ear
+1022	weakness in limbs
+1023	myasthenic crisis
+1024	difficulty holding head up
+1025	droopy eyelids
+1026	difficulty making facial expressions
+1027	decreased sense of smell
+1028	partial loss of vision or double vision
+1029	bulging or persistently watering eye
+1030	mucus draining from the nose (may be blood-stained)
+1031	nosebleeds
+1032	nose
+1033	persistent blocked nose (usually on one side)
+1034	or roof of mouth
+1035	pain or numbness in the face
+1036	lump or growth on face
+1037	- a blocked or stuffy nose
+1038	- tinnitus (hearing sounds coming from inside the body)
+1039	- a lump in the neck
+1040	- hearing loss (usually in 1 ear)
+1041	- nosebleeds
+1042	general discomfort
+1043	weakness in legs
+1044	jerky eye and muscle movements
+1045	difficulty passing urine
+1046	swollen abdomen
+1047	visible lump in neck
+1048	high blood pressure
+1049	pale appearance
+1050	tummy pains
+1051	yellowing of the skin and whites of the eyes
+1052	dull or aching pain in the top right of the tummy
+1053	painless swelling in a lymph node
+1054	the provided text does not explicitly mention specific symptoms. \ncommon symptoms associated with non-hodgkin lymphoma in children include:\n\n- lump or swelling in the body\n- high temperature (fever)\n- tiredness\n- weight loss\n- loss of appetite
+1055	watery diarrhea
+1056	sudden feeling sick
+1057	slight fever
+1058	painful stomach cramps
+1059	projectile vomiting
+1060	aching limbs
+1061	heavy nosebleeds
+1062	light nosebleeds
+1063	feeling weak or dizzy
+1064	increased sweating
+1065	difficulty doing physical activity
+1066	often feeling very tired
+1067	snoring
+1068	fear of deliberately harming yourself or others
+1069	fear of harming yourself or others by mistake or accident
+1070	fear of contamination by disease
+1071	infection or an unpleasant substance
+1072	a need for symmetry or orderliness
+1073	repeated short periods where breathing is interrupted by gasping or snorting
+1074	noisy and laboured breathing
+1075	loud snoring
+1076	frequent awakening during sleep
+1077	bringing up food soon after eating
+1078	persistent indigestion or heartburn
+1079	chest or back
+1080	pain or discomfort in upper tummy
+1081	burning sensation in the mouth
+1082	cracks at the corners of the mouth
+1083	white patches in the mouth that can often be wiped off
+1084	a painful
+1085	redness inside the mouth and throat
+1086	loss of taste or an unpleasant taste in the mouth
+1087	leaving behind red areas that may bleed slightly
+1088	loss of height
+1089	fragile bones
+1090	stooped posture
+1091	fractures
+1092	limp (if tumour is in leg or pelvis)
+1093	pain that gets more severe especially at night
+1094	pain in affected bone
+1095	swelling around affected bone
+1096	bone breakage with minor fall or accident
+1097	redness and swelling of your outer ear and ear canal
+1098	tenderness when moving your ear or jaw
+1099	a feeling of pressure and fullness inside your ear
+1100	swollen and sore glands in your throat
+1101	some hearing loss
+1102	itching and irritation in and around your ear canal
+1103	discharge from your ear (thin and watery or thick and pus-like)
+1104	scaly skin in and around your ear canal
+1105	persistent bloating
+1106	feeling full quickly
+1107	increased abdominal size
+1108	pain in the pelvis and lower stomach
+1109	feeling of fullness or bloating in the abdomen
+1110	pain or swelling in the abdomen
+1111	irregular periods
+1112	needing to pee more often
+1113	pain during sex
+1114	severe pelvic pain
+1115	difficulty having a bowel movement
+1116	nervousness
+1117	goitre
+1118	bleeding from the skin of the nipple
+1119	visible changes to the nipple
+1120	burning sensation
+1121	unexpected weight loss
+1122	pain in the back or stomach area
+1123	bowel changes
+1124	numbness or pins and needles
+1125	trembling
+1126	churning stomach
+1127	shaking
+1128	tingling sensation
+1129	loss of sense of smell (anosmia)
+1130	depression and anxiety
+1131	"involuntary shaking (tremor)
+1132	memory problems"
+1133	stiff and inflexible muscles
+1134	slow movement
+1135	problems sleeping (insomnia)
+1136	brain development issues
+1137	eye issues or absent eye
+1138	unusual vaginal discharge
+1139	pain around the pelvis or lower tummy
+1140	bleeding between periods or after sex
+1141	discomfort or pain during sex that is felt deep inside the pelvis
+1142	severe tummy pain
+1143	discomfort during sex
+1144	which sometimes needs pushed back up
+1145	a feeling of a bulge or something coming down the vagina
+1146	problems peeing – a slow stream
+1147	a feeling of a bulge or something coming out the vagina
+1148	a feeling of not emptying your bladder fully
+1149	needing to go to the toilet a lot or leaking
+1150	bleeding from the penis or from under the foreskin
+1151	a rash on the penis
+1152	a growth or sore on the penis that doesn’t heal within 4 weeks
+1153	thickening of the skin of the penis or foreskin that makes it difficult to draw back the foreskin (phimosis)
+1154	a foul-smelling discharge
+1155	a change in the colour of the skin of the penis or foreskin
+1156	burning
+1157	especially in the feet
+1158	numbness and tingling in the feet or hands
+1159	loss of balance and co-ordination
+1160	stabbing or shooting pain in affected areas
+1161	and professional carers
+1162	avoiding other people
+1163	difficulty maintaining stable and close relationships
+1164	worthlessness or anger
+1165	being overwhelmed by negative feelings like distress
+1166	especially with partners
+1167	children
+1168	feeling empty and emotionally disconnected
+1169	odd behavior
+1170	pain felt in the shoulder
+1171	or movement
+1172	worsened pain with coughing
+1173	sharp chest pain when breathing deeply
+1174	relieved by shallow breaths
+1175	dry cough
+1176	sweating and shivering
+1177	difficulty or delays getting pregnant
+1178	excess facial or body hair
+1179	hair loss or hair thinning
+1180	oily skin or acne
+1181	weight gain
+1182	tight joints (contractures)
+1183	shrinking of the muscles (atrophy)
+1184	pain in muscles or joints
+1185	chronic fatigue including physical tiredness and brain fatigue
+1186	phobias
+1187	guilt
+1188	flashbacks
+1189	feelings of isolation
+1190	avoidance
+1191	nightmares
+1192	sleeping problems
+1193	angry outbursts
+1194	emotional numbing
+1195	lack of energy and feeling tired all the time
+1196	loss of interest in the world around you
+1197	feeling sleepy during the day
+1198	hopelessness and self-blame
+1199	irritable or very apathetic
+1200	problems concentrating and making decisions
+1201	difficulty bonding with your baby – feeling of indifference and no sense of enjoyment in their company
+1202	thinking about suicide and self-harm
+1203	feeling that you’re unable to look after your baby
+1204	frightening thoughts
+1205	loss of appetite or an increased appetite (comfort eating)
+1206	feeling agitated
+1207	persistent feeling of sadness and low mood
+1208	no longer enjoying things that used to give you pleasure
+1209	feelings of guilt
+1210	trouble sleeping at night
+1211	there are no symptoms provided in the text. \n\ncommon symptoms associated with pregnancy and early parenthood:\n1. nausea and vomiting\n2. fatigue\n3. breast tenderness\n4. frequent urination\n5. mood swings
+1212	pain or itchiness
+1213	discoloured skin
+1214	warm or hard skin
+1215	skin breakdown
+1216	open wounds
+1217	straining or taking a long time while urinating
+1218	weak flow
+1219	feeling that your bladder has not emptied fully
+1220	needing to rush to the toilet
+1221	difficulty in starting to pee (hesitancy)
+1222	needing to urinate more frequently
+1223	silver scales
+1224	red skin patches
+1225	affecting hands
+1226	spine
+1227	feet
+1228	elbows
+1229	confused and disturbed thoughts
+1230	lack of insight
+1231	delusions
+1232	hallucinations
+1233	dark red or brown spots in underwear
+1234	white or yellow dots attached to hair
+1235	itchy red spots
+1236	small red or blue spots on skin
+1237	crusty or sticky eyelashes
+1238	there are no specific symptoms mentioned in the text. common symptoms associated with rare childhood cancers can include:\n\n- unexplained weight loss\n- fatigue\n- persistent pain\n- lumps or swelling in the body\n- changes in vision or other sensory changes
+1239	blue
+1240	affected areas: fingers
+1241	toes
+1242	color changes (white
+1243	ears
+1244	nipples
+1245	red)
+1246	swollen eyelids
+1247	bouts of diarrhea
+1248	feeling unusually tired
+1249	swelling of fingers and toes
+1250	joint stiffness
+1251	eye pain
+1252	lower back and buttock pain
+1253	tenderness and swelling
+1254	pain or burning sensation when urinating
+1255	thick and crumbly nails
+1256	"uncomfortable sensation in legs
+1257	feeling like fizzy water is inside blood vessels
+1258	itching or throbbing sensation
+1259	painful cramping sensation in legs"
+1260	'creepy-crawly' feeling
+1261	squint
+1262	"white pupil that does not reflect light (leukocoria)
+1263	painful red eye"
+1264	blockage in the head or neck area
+1265	swollen and protruding eye
+1266	lump or swelling
+1267	difficulty going to the toilet
+1268	pain or discomfort in the abdomen
+1269	discharge from the nose or throat
+1270	warmth
+1271	patches of scaly skin
+1272	black
+1273	small patches of scaly skin on the scalp
+1274	bald patches
+1275	crusting on the scalp
+1276	scaly skin
+1277	brittle nails.
+1278	patchy hair loss
+1279	red or silvery rash on the skin
+1280	raised and blistered skin
+1281	inflamed skin
+1282	pus-filled sores on the scalp
+1283	thickening of the nail
+1284	or green discolouration of the nail
+1285	burning and stinging sensations
+1286	spots (papules and pustules)
+1287	flushing
+1288	permanent redness
+1289	small blood vessels becoming visible
+1290	burrow marks
+1291	red spots
+1292	intense itching
+1293	crusty sores
+1294	swollen neck glands
+1295	nausea or vomiting
+1296	changes in behavior
+1297	becoming socially withdrawn
+1298	muddled thoughts
+1299	one shoulder or hip more prominent than the other
+1300	visibly curved spine
+1301	one shoulder higher than the other
+1302	back pain
+1303	clothes not hanging properly
+1304	change in mental state
+1305	rapid heart rate
+1306	low blood pressure
+1307	inability to lie down
+1308	sudden shortness of breath
+1309	breathing difficulty (dyspnoea)
+1310	sickle cell crises
+1311	sudden tummy swelling
+1312	unresponsive pain
+1313	sudden vision loss or changes
+1314	pale skin or lips
+1315	severe headache
+1316	priapism
+1317	weakness on one or both sides of the body
+1318	- pain and tenderness around cheeks
+1319	- breathing through the mouth (in children)
+1320	- bad breath (halitosis)
+1321	- toothache
+1322	- high temperature (fever) of 38°c (100.4°f) or more
+1323	eyes or forehead
+1324	- blocked nose
+1325	- green or yellow discharge from the nose
+1326	- difficulty feeding (in children)
+1327	- reduced sense of smell
+1328	- irritability (in children)
+1329	- nasal sounding speech (in children).
+1330	vaginal dryness
+1331	dry eyes
+1332	tooth decay
+1333	gum disease
+1334	larger than normal moles
+1335	change in existing mole
+1336	more than 1 colour
+1337	irregular shape
+1338	new mole
+1339	red and firm cancerous lumps
+1340	flat and scaly cancerous patches
+1341	appearance of a lump or patch on the skin that doesn't heal
+1342	a runny nose
+1343	feeling generally unwell.
+1344	a sore throat
+1345	an upset stomach
+1346	a slightly high temperature (fever) of around 38°c (100.4°f)
+1347	feeling of fullness
+1348	swollen tummy\n- problems going to the toilet (constipation)\n- pain in the lower tummy\n- difficulty peeing (passing urine)
+1349	- lump or swelling in the limb\n- painful
+1350	pain behind left ribs
+1351	increased risk of infection
+1352	feeling full very quickly after eating
+1353	bleeding or bruising
+1354	pride
+1355	feeling angry
+1356	emotions in turmoil
+1357	sad
+1358	love
+1359	lonely
+1360	guilty
+1361	sudden severe abdominal pain
+1362	persistent indigestion
+1363	blood in stools or black stools
+1364	trapped wind
+1365	persistent stomach pain
+1366	feeling very full or bloated after meals
+1367	frequent burping
+1368	worsening condition
+1369	grunting noises
+1370	difficulty waking up
+1371	lack of urination
+1372	tongue or lips turning blue
+1373	pauses in breathing
+1374	high fever
+1375	skin
+1376	excessive tiredness
+1377	floppiness
+1378	reduced appetite
+1379	no symptoms provided. \n\ncommon symptoms associated with mental health conditions include:\n- low mood\n- anxiety\n- depression\n- anger management\n- panic
+1380	overheating
+1381	crying
+1382	flat head
+1383	unusually sleepy baby
+1384	there are no explicit symptoms mentioned in the text. \n\ncommon symptoms associated with suicidal thoughts include:\n- intense sadness or hopelessness\n- feelings of worthlessness or guilt\n- social withdrawal\n- changes in appetite or sleep patterns\n- loss of interest in activities
+1385	light-headedness
+1386	fatigue"
+1387	"heart racing in chest or throat
+1388	under the chin
+1389	around the groin\n- sore throat\n- cough\n- fever\n- suddenly tender or painful glands
+1390	in the armpits
+1391	- tender and painful lumps on each side of the neck
+1392	painless sore or ulcer
+1393	joint pains
+1394	loss of co-ordination
+1395	skin rashes
+1396	dementia
+1397	non-itchy skin rash
+1398	blindness
+1399	deafness
+1400	heart disease
+1401	change in texture or firmness of a testicle
+1402	difference between testicles
+1403	painless lump or swelling in one testicle
+1404	dull ache in the scrotum
+1405	feeling of heaviness in the scrotum
+1406	no symptoms mentioned in the text. \n\ncommon symptoms associated with testicular cancer:\n- swelling or lumps in the testicles\n- heaviness or ache in the lower abdomen or scrotum\n- pain or discomfort in the testicles or scrotum\n- changes in the shape or size of the testicles\n- accumulation of fluid in the scrotum (hydrocele)
+1407	swollen testicles
+1408	1 testicle that has become bigger than the other
+1409	aching or discomfort in your testicles that does not go away
+1410	a lump in your testicles
+1411	a change in the way your testicles feel
+1412	a change in the shape of your testicles
+1413	excessive thirst
+1414	urinating more often than usual
+1415	feeling thirsty all the time
+1416	bedwetting
+1417	itchiness around the bottom or vagina
+1418	difficulty getting to sleep or staying asleep (insomnia)
+1419	burning and redness around the head of the penis and under the foreskin
+1420	a white discharge (like cottage cheese)
+1421	white vaginal discharge (often like cottage cheese)
+1422	itching and irritation around the vagina
+1423	soreness and stinging during sex or when you pee
+1424	sore throat or difficulty swallowing
+1425	lump or swelling in the neck
+1426	pain in neck
+1427	unexplained hoarseness
+1428	painless lump in the front of the neck
+1429	whistling
+1430	music or singing
+1431	sensitivity to everyday sounds
+1432	difficulty sleeping (insomnia)
+1433	grinding
+1434	buzzing
+1435	humming
+1436	noises that beat in time with your pulse
+1437	hissing
+1438	high temperature (fever) over 38°c (100.4°f)
+1439	grey
+1440	toothache
+1441	unpleasant taste in mouth
+1442	tooth sensitivity
+1443	brown or black spots on teeth
+1444	pain worsened by eating or drinking
+1445	pain in and around the teeth and jaws
+1446	sore and tender area close to the infected tooth
+1447	pain worse at night
+1448	sharp and sudden pain
+1449	difficulty understanding what others are saying
+1450	complete paralysis of one side of the body
+1451	problems with balance and co-ordination
+1452	sudden loss or blurring of vision
+1453	severe facial pain
+1454	attacks lasting from seconds to minutes
+1455	electric shock sensations
+1456	shooting pain
+1457	pain in lower part of face
+1458	which may be bloody
+1459	tiredness and fatigue
+1460	a persistent cough that lasts more than three weeks and usually brings up phlegm
+1461	persistent infections such as thrush
+1462	passing urine more often than usual
+1463	symptoms may be asymptomatic
+1464	genital itching and soreness
+1465	pain or discomfort during sex
+1466	pain or burning sensation when peeing
+1467	yellow or green discharge from the vagina or penis
+1468	bowel problems
+1469	muscle weakness in the legs
+1470	and sometimes the arms
+1471	unusual sensations and numbness
+1472	bladder problems
+1473	sexual problems
+1474	or pus)
+1475	needing to poo often
+1476	mucus
+1477	recurring diarrhoea (may contain blood
+1478	slow movements and thoughts
+1479	dry and scaly skin
+1480	brittle hair and nails
+1481	being sensitive to cold
+1482	muscle aches and weakness
+1483	feeling a sudden need to pee and being unable to stop it
+1484	peeing by accident
+1485	feeling as though you’re unable to empty your bladder fully
+1486	pain or discomfort when peeing
+1487	sudden urges to pee
+1488	a need to pee more often than usual
+1489	deliberately holding in pee
+1490	cloudy pee
+1491	not eating properly
+1492	change in normal toilet habits
+1493	unpleasant-smelling pee
+1494	not gaining weight
+1495	rapidly changing rash
+1496	raised rash
+1497	widespread rash
+1498	localized rash
+1499	- pain during sex
+1500	- smelly or bloody vaginal discharge
+1501	- pelvic pain
+1502	- abnormal vaginal bleeding
+1503	- pain when urinating
+1504	accompanied by itchiness
+1505	green or yellow and frothy
+1506	accompanied by pain or bleeding
+1507	thick and white
+1508	foul-smelling
+1509	brown discolouration of the skin
+1510	dry and flaky skin
+1511	scaly or crusty skin
+1512	leg swelling
+1513	red and swollen skin
+1514	foul-smelling discharge
+1515	discoloured or hardened skin
+1516	a high temperature
+1517	ringing in your ears (tinnitus)
+1518	loss of balance
+1519	disturbed vision
+1520	and judgment
+1521	problems with memory
+1522	pins and needles (paraesthesia)
+1523	sore and red tongue
+1524	psychological problems such as depression and confusion
+1525	understanding
+1526	severe abdominal (tummy) pain
+1527	blood in vomit or what looks like coffee granules
+1528	severe chest pain
+1529	green or yellow-green vomit
+1530	stiff neck and high temperature (fever)
+1531	mole on the vulva that changes shape or colour
+1532	pain in the vulva
+1533	lump or wart-like growth on the vulva
+1534	bleeding from the vulva or blood-stained vaginal discharge between periods
+1535	persistent itch in the vulva
+1536	open sore in the vulva
+1537	burning pain when passing urine
+1538	raised and thickened patches of skin
+1539	- small lumps on the skin of the hands and feet\n- developing singly or in clusters\n- rough
+1540	hard texture of the warts\n- common in children and teenagers\n- warts vary in appearance and size
+1541	intense coughing bouts
+1542	cyanosis (turning blue)
+1543	hernia.
+1544	red and watery eyes
+1545	brief periods of stopped breathing
+1546	bruised ribs
+1547	red face
+1548	slightly raised temperature
+1549	gasping for breath
+1550	'whoop' sound during breathing
+1551	pain in the lower abdomen
+1552	bleeding between periods
+1553	abnormal vaginal bleeding
+1554	- a high temperature (fever)\n- a headache\n- nausea or vomiting\n- muscle pain
+1555	including backache\n- loss of appetite
+\.
+
+
+--
+-- TOC entry 3379 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: diseases_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rocco
+--
+
+SELECT pg_catalog.setval('public.diseases_id_seq', 334, true);
+
+
+--
+-- TOC entry 3380 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: symptoms_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rocco
+--
+
+SELECT pg_catalog.setval('public.symptoms_id_seq', 1555, true);
+
+
+--
+-- TOC entry 3219 (class 2606 OID 28170)
+-- Name: diseases diseases_name_key; Type: CONSTRAINT; Schema: public; Owner: rocco
+--
+
+ALTER TABLE ONLY public.diseases
+    ADD CONSTRAINT diseases_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 3221 (class 2606 OID 28168)
+-- Name: diseases diseases_pkey; Type: CONSTRAINT; Schema: public; Owner: rocco
+--
+
+ALTER TABLE ONLY public.diseases
+    ADD CONSTRAINT diseases_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3223 (class 2606 OID 28181)
+-- Name: symptoms symptoms_name_key; Type: CONSTRAINT; Schema: public; Owner: rocco
+--
+
+ALTER TABLE ONLY public.symptoms
+    ADD CONSTRAINT symptoms_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 3225 (class 2606 OID 28179)
+-- Name: symptoms symptoms_pkey; Type: CONSTRAINT; Schema: public; Owner: rocco
+--
+
+ALTER TABLE ONLY public.symptoms
+    ADD CONSTRAINT symptoms_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3226 (class 2606 OID 28185)
+-- Name: disease_symptoms disease_symptoms_disease_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rocco
+--
+
+ALTER TABLE ONLY public.disease_symptoms
+    ADD CONSTRAINT disease_symptoms_disease_id_fkey FOREIGN KEY (disease_id) REFERENCES public.diseases(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3227 (class 2606 OID 28190)
+-- Name: disease_symptoms disease_symptoms_symptom_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rocco
+--
+
+ALTER TABLE ONLY public.disease_symptoms
+    ADD CONSTRAINT disease_symptoms_symptom_id_fkey FOREIGN KEY (symptom_id) REFERENCES public.symptoms(id) ON DELETE CASCADE;
+
+
+-- Completed on 2024-04-16 16:59:13 CAT
+
+--
+-- PostgreSQL database dump complete
+--
+

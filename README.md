@@ -4,23 +4,22 @@
 
 To run this project on your local machine, follow these steps:
 
-1. Clone this repository to your PC using the following command:
-
+1. **Clone the Repository**: Use the following command to clone this repository to your PC:
 ```bash
 git clone git@github.com:Darlington6/PLD_Project_NegPod27.git
 ```
 
-2. Navigate to the root directory of the cloned repository:
-
+2. **Navigate to the Directory**: Move to the root directory of the cloned repository:
 ```bash
 cd PLD_Project_NegPod27
 ```
 
-3. Run the `intro.py` script to start the user journey:
-
+3. **Run the Script**: Execute the `intro.py` script to begin the user journey:
 ```bash
 python3 intro.py
 ```
+
+Additionally, ensure you set up the database and define the `DB_URI` environment variable in a dotenv file. You can find the database dump in the `\diseases` file. Remember to configure other necessary environment variables as well.
 
 ## Usage Guidelines
 

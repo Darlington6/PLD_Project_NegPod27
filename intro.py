@@ -1,20 +1,21 @@
-from sqlalchemy import func
-from db.models import Disease, Symptom, disease_symptoms
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+from db.models import Disease, Symptom
 from db import get_db, init_db
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from the .env file
+load_dotenv()
 
 init_db()
 db_gen = get_db()
-db = get_db()
+db = next(db_gen)
 
-diseases = {
-    'Malaria': {'high fever', 'headache', 'lack of appetite'},
-    "Influenza": {"fever", "cough", "sore throat", "muscle aches", "fatigue"},
-    "Common Cold": {"runny nose", "sneezing", "sore throat", "cough", "mild fever"},
-    "COVID-19": {"fever", "dry cough", "shortness of breath", "fatigue", "loss of taste or smell"},
-    "Cholera": {"vomiting", "thirst", "diarrhea", "irritability", "low blood pressure"},
-    "Chicken pox": {"headache", "lack of appetite", "sore throat", "stomach ache"},
-    "Typhoid Fever": {"fever", "weakness", "stomach pain", "headache", "lack of appetite"}
-}
+client = OpenAI(
+    api_key=os.getenv("OAI_API_KEY")
+)
 
 symptoms = db.query(Symptom).all()
 
@@ -28,54 +29,73 @@ To get started, please choose the symptoms you have from the list below:
 {numbered_symptoms}"""
     symptom = get_input(welcome)
     message = identify_disease(symptom)
+
+    print('\n\n')
     print(message)
 
 
-def get_disease_symptom_counts(db_session, symptom_ids):
-    query = (
-        db_session.query(
-            disease_symptoms.c.disease_id,
-            func.count(disease_symptoms.c.symptom_id)
-        )
-        .filter(disease_symptoms.c.symptom_id.in_(symptom_ids))
-        .group_by(disease_symptoms.c.disease_id)
-        .order_by(func.count(disease_symptoms.c.symptom_id).desc())
-    )
-    results = query.all()
+def get_disease_symptom_counts(db_session: Session, symptom_ids):
+    query = text("""SELECT ds.disease_id, COUNT(ds.symptom_id) AS symptom_count
+FROM disease_symptoms ds
+WHERE ds.symptom_id = ANY (:symptom_ids)
+GROUP BY ds.disease_id
+ORDER BY symptom_count DESC;
+""")
+    results = db_session.execute(query,  {"symptom_ids": symptom_ids}).all()
     return results
 
 
 def identify_disease(user_symptoms):
-    diseases_counts = get_disease_symptom_counts(db, user_symptoms)
-    print(diseases_counts)
-    message = f'''
-It is likely that you have {diseases_counts[0].name} disease.
+    symptom_ids = [symptom.id for symptom in user_symptoms]
+    diseases_counts = get_disease_symptom_counts(db, symptom_ids)
+    highest_count = diseases_counts[0]
 
-Please know that this is not a professional doctor, so you should not rely solely on this information. This 
-application was developed for educational purposes only.
+    disease = db.query(Disease).filter_by(id=highest_count.disease_id).first().name
+    message = client.chat.completions.create(
+        model='gpt-3.5-turbo',
+        messages=[
+            {"role": "system",
+             "content": f'''You are a medical specialist. Based on the data provided, the patient has exhibited the 
+                 following symptoms: "{",".join([symptom.name for symptom in user_symptoms])}". It is likely that 
+                 they are suffering from {disease}. Your task is to provide inform them of their condition, offer 
+                 personalized advice and recommended actions to help reduce the severity of the disease or aid in 
+                 recovery. Include in your response:
 
-Thank you for using our application.'''
+    Suggested lifestyle changes. Dietary modifications. Precautionary steps to take. Indications for when to seek 
+    immediate medical attention. Conclude your recommendations with a disclaimer: "Please consult with a physician to 
+    obtain a formal diagnosis and a tailored treatment plan. The advice provided here is for informational purposes only 
+    and is not a substitute for professional medical consultation. We are not liable for any harm that may arise from 
+    following these recommendations without proper medical supervision.'''},
+            {"role": "user",
+             "content": f'The user has shown these symptoms "{",".join([symptom.name for symptom in user_symptoms])}" '
+                        f'and we have found that they are likely to have this condition {disease}.'}
+        ]
+    )
 
-    return message
+    return message.choices[0].message.content
 
 
 # User Validation
 def get_input(prompt):
     valid = False
-    user_input = {}
+    syms = []
     print(prompt)
     while not valid:
         try:
             user_input = input('Your response should be symptom numbers separated by comma: ')
             user_input = [int(i) for i in user_input.split(",")]
-            user_input = [symptoms[i - 1] for i in user_input]
             user_input = set(user_input)
+            for _id in user_input:
+                sym = db.query(Symptom).filter_by(id=_id).first()
+                if not sym:
+                    raise ValueError(f"No symptom with id {_id}")
+                syms.append(sym)
             valid = True
             break
         except:
             print('Please enter valid inputs and try again')
             pass
-    return user_input
+    return syms
 
 
 if __name__ == "__main__":

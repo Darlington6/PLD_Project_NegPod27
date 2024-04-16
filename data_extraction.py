@@ -2,14 +2,19 @@ import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
 from db.models import Disease, Symptom
+from dotenv import load_dotenv
 from db import get_db, init_db
+import os
+
+# Load environment variables from the .env file
+load_dotenv()
 
 init_db()
 db_gen = get_db()
 db = next(db_gen)
 
 client = OpenAI(
-    api_key='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'
+    api_key=os.getenv("OAI_API_KEY")
 )
 
 origin = 'https://www.nhsinform.scot/illnesses-and-conditions/a-to-z/'
@@ -47,6 +52,7 @@ Examples of well-formatted responses:
 
     duplicate = db.query(Disease).filter_by(name=disease.text.strip()).first()
     if duplicate:
+        print('Duplicate Disease')
         continue
 
     dis = Disease(
@@ -56,7 +62,7 @@ Examples of well-formatted responses:
     for symptom in symptoms:
         duplicate = db.query(Symptom).filter_by(name=symptom.strip().lower()).first()
         if duplicate:
-            print('duplicate symptom')
+            print('Duplicate Symptom')
             s = duplicate
             s.diseases.append(dis)
         else:
