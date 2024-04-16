@@ -1,3 +1,11 @@
+from sqlalchemy import func
+from db.models import Disease, Symptom, disease_symptoms
+from db import get_db, init_db
+
+init_db()
+db_gen = get_db()
+db = get_db()
+
 diseases = {
     'Malaria': {'high fever', 'headache', 'lack of appetite'},
     "Influenza": {"fever", "cough", "sore throat", "muscle aches", "fatigue"},
@@ -5,41 +13,50 @@ diseases = {
     "COVID-19": {"fever", "dry cough", "shortness of breath", "fatigue", "loss of taste or smell"},
     "Cholera": {"vomiting", "thirst", "diarrhea", "irritability", "low blood pressure"},
     "Chicken pox": {"headache", "lack of appetite", "sore throat", "stomach ache"},
-    "Typhoid Fever":{"fever", "weakness", "stomach pain", "headache", "lack of appetite"}
+    "Typhoid Fever": {"fever", "weakness", "stomach pain", "headache", "lack of appetite"}
 }
 
-symptoms = ['dry cough', 'fever', 'runny nose', 'fatigue', 'sore throat', 'muscle aches', 'cough',
-            'shortness of breath', 'mild fever', 'loss of taste or smell', 'sneezing', 'lack of appetite', 'headache', 'vomiting', 'thirst','diarrhea', 'irritability', 'low blood pressure', 'stomach ache', 'weakness']
+symptoms = db.query(Symptom).all()
 
 
 def intro():
-    numbered_symptoms = ''.join(f"{index}. {symptom}\n" for index, symptom in enumerate(symptoms, start=1))
-    welcome = f"""Welcome to Dr. Chat! We help you identify possible diseases you might be suffering from based on the symptoms you are having.
+    numbered_symptoms = ''.join(f"{index}. {symptom.name}\n" for index, symptom in enumerate(symptoms, start=1))
+    welcome = f"""Welcome to Dr. Chat! We help you identify possible diseases you might be suffering from based on 
+    the symptoms you are having.
 
 To get started, please choose the symptoms you have from the list below:
 {numbered_symptoms}"""
     symptom = get_input(welcome)
-    message = identify_disease(symptom)[0]
+    message = identify_disease(symptom)
     print(message)
 
 
-def identify_disease(user_symptoms):
-    score = 0
-    disease = diseases['Malaria']
-    for key in diseases.keys():
-        intersection = diseases[key].intersection(user_symptoms)
-        new_score = len(intersection)
-        if new_score > score:
-            disease = key
-            score = new_score
-    message = f'''
-It is likely that you have {disease} disease.
+def get_disease_symptom_counts(db_session, symptom_ids):
+    query = (
+        db_session.query(
+            disease_symptoms.c.disease_id,
+            func.count(disease_symptoms.c.symptom_id)
+        )
+        .filter(disease_symptoms.c.symptom_id.in_(symptom_ids))
+        .group_by(disease_symptoms.c.disease_id)
+        .order_by(func.count(disease_symptoms.c.symptom_id).desc())
+    )
+    results = query.all()
+    return results
 
-Please know that this is not a professional doctor, so you should not rely solely on this information. This application was developed for educational purposes only.
+
+def identify_disease(user_symptoms):
+    diseases_counts = get_disease_symptom_counts(db, user_symptoms)
+    print(diseases_counts)
+    message = f'''
+It is likely that you have {diseases_counts[0].name} disease.
+
+Please know that this is not a professional doctor, so you should not rely solely on this information. This 
+application was developed for educational purposes only.
 
 Thank you for using our application.'''
 
-    return [message, disease]
+    return message
 
 
 # User Validation

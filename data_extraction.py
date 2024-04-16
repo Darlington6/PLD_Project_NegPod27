@@ -1,9 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
-from app.db.models import Disease, Symptom
-from app.db import get_db, init_db
-
+from db.models import Disease, Symptom
+from db import get_db, init_db
 
 init_db()
 db_gen = get_db()
@@ -19,14 +18,14 @@ page = requests.get(origin)
 soup = BeautifulSoup(page.content, 'html.parser')
 
 diseases = soup.select('.az_list_indivisual > ul > li > a')
-
+i = 0
 for disease in diseases:
     link = disease.get('href')
     disease_page = requests.get(link)
     disease_soup = BeautifulSoup(disease_page.content, 'html.parser')
     whole_page = disease_soup.text
 
-     completion = client.chat.completions.create(
+    completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
@@ -44,18 +43,29 @@ Examples of well-formatted responses:
         ]
     )
 
-     symptoms = completion.choices[0].message.content.split(',')
+    symptoms = completion.choices[0].message.content.split(',')
 
-    d = Disease(
-        name=disease.text
+    duplicate = db.query(Disease).filter_by(name=disease.text.strip()).first()
+    if duplicate:
+        continue
+
+    dis = Disease(
+        name=disease.text.strip()
     )
+    symptoms = set(symptoms)
     for symptom in symptoms:
-        s = Symptom(
-            name=symptom
-        
-        )
-        d.symptoms.append(s)
+        duplicate = db.query(Symptom).filter_by(name=symptom.strip().lower()).first()
+        if duplicate:
+            print('duplicate symptom')
+            s = duplicate
+            s.diseases.append(dis)
+        else:
+            s = Symptom(
+                name=symptom.strip().lower()
+            )
+            dis.symptoms.append(s)
 
-    db.add(d)
+    db.add(dis)
     db.commit()
-    print('added')
+    print('added', i)
+    i += 1
